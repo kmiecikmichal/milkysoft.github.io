@@ -1,4 +1,4 @@
-# MilkySoft
+# MilkySoft Website
 
 A modern and minimalistic website for MilkySoft, a web product-oriented startup.
 
@@ -9,12 +9,12 @@ A modern and minimalistic website for MilkySoft, a web product-oriented startup.
 - Tailwind CSS
 - ESLint
 
-## Getting Started
+## Development
 
 1. Clone the repository:
 ```bash
-git clone [repository-url]
-cd milkysoft_io
+git clone https://github.com/kmiecikmichal/milkysoft.github.io.git
+cd milkysoft.github.io
 ```
 
 2. Install dependencies:
@@ -29,6 +29,29 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Deployment
+
+This website is deployed using GitHub Pages. The deployment process is automated using GitHub Actions.
+
+### Manual Deployment
+
+1. Build the project:
+```bash
+npm run build
+```
+
+2. Export the static files:
+```bash
+npm run export
+```
+
+3. Push the changes to the `gh-pages` branch:
+```bash
+git add .
+git commit -m "Deploy to GitHub Pages"
+git push origin gh-pages
+```
+
 ## Project Structure
 
 ```
@@ -40,26 +63,12 @@ src/
 └── types/           # TypeScript type definitions
 ```
 
+## License
+
+MIT License - feel free to use this project for your own purposes.
+
 ## Development
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `
