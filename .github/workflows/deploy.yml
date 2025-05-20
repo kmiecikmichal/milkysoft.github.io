@@ -34,15 +34,24 @@ jobs:
       - name: Create .nojekyll file
         run: touch out/.nojekyll
 
-      - name: Move files to root
+      - name: Prepare deployment
         run: |
-          cp -r out/* .
-          cp out/.nojekyll .
+          # Create a temporary directory
+          mkdir -p temp_deploy
+          # Copy all files from out to temp_deploy
+          cp -r out/* temp_deploy/
+          # Copy .nojekyll to temp_deploy
+          cp out/.nojekyll temp_deploy/
+          # Ensure index.html exists in the root
+          if [ ! -f temp_deploy/index.html ]; then
+            echo "Error: index.html not found in build output"
+            exit 1
+          fi
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: .
+          folder: temp_deploy
           branch: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
           clean: true 
