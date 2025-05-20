@@ -34,6 +34,11 @@ jobs:
       - name: Create .nojekyll file
         run: touch out/.nojekyll
 
+      - name: Copy routing files
+        run: |
+          cp public/404.html out/
+          cp public/index.html out/
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
