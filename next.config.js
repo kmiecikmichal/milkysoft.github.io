@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+  output: 'export',
   images: {
     unoptimized: true,
   },
@@ -8,6 +8,13 @@ const nextConfig = {
   basePath: process.env.NODE_ENV === 'production' ? '/milkysoft.github.io' : '',
   assetPrefix: process.env.NODE_ENV === 'production' ? '/milkysoft.github.io' : '',
   distDir: 'out',
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader', 'postcss-loader'],
+    });
+    return config;
+  },
 };
 
 module.exports = nextConfig; 
