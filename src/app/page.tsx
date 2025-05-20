@@ -2,74 +2,116 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-        <div className="container relative z-10">
-          <div className="text-center max-w-4xl mx-auto px-4">
-            <h1 className="text-7xl md:text-8xl font-medium text-gray-900 mb-8 leading-none tracking-tight">
-              <span className="text-purple-600">MILKYSOFT</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
-              We build innovative software solutions that help businesses grow and succeed in the digital age.
-            </p>
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-200/30 via-transparent to-transparent"></div>
+        <div className="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
+          <h1 className="text-6xl sm:text-8xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 animate-gradient">
+            MilkySoft
+          </h1>
+          <p className="text-xl sm:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Crafting digital experiences that blend creativity with functionality.
+          </p>
+          <div className="flex gap-6 justify-center">
+            <a 
+              href="#contact" 
+              className="group px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white hover:from-violet-700 hover:to-fuchsia-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
+            >
+              Get Started
+              <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
+            </a>
+            <a 
+              href="#about" 
+              className="group px-8 py-4 rounded-full border-2 border-gray-200 hover:border-violet-500 transition-all duration-300 hover:scale-105 transform"
+            >
+              Learn More
+            </a>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-32 bg-white">
-        <div className="container">
-          <h2 className="text-4xl md:text-5xl font-medium text-center text-gray-900 mb-20 tracking-tight">
-            Why Choose MilkySoft?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              {
-                title: "Innovative Solutions",
-                description: "Cutting-edge technology and modern approaches to solve complex problems.",
-                icon: "🚀",
-                color: "bg-purple-50"
-              },
-              {
-                title: "Expert Team",
-                description: "Skilled professionals with years of experience in software development.",
-                icon: "👥",
-                color: "bg-purple-50"
-              },
-              {
-                title: "Quality First",
-                description: "We never compromise on quality, ensuring robust and reliable solutions.",
-                icon: "✨",
-                color: "bg-purple-50"
-              }
-            ].map((feature, index) => (
-              <div key={index} className="group p-8 rounded-3xl bg-white hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
-                <div className={`w-16 h-16 ${feature.color} rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform duration-500`}>
-                  {feature.icon}
-                </div>
-                <h3 className="text-2xl font-medium text-gray-900 mb-4 tracking-tight">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed font-light">{feature.description}</p>
-              </div>
-            ))}
+      <section id="about" className="py-32 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-pink-200/20 via-transparent to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-500">
+              Why Choose MilkySoft?
+            </h2>
+            <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+              We combine cutting-edge technology with innovative design to create exceptional digital experiences.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="group p-8 rounded-2xl bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105 transform">
+              <div className="text-4xl mb-4">🚀</div>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Modern Technology</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Built with the latest web technologies for optimal performance and user experience.
+              </p>
+            </div>
+            <div className="group p-8 rounded-2xl bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105 transform">
+              <div className="text-4xl mb-4">📈</div>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Scalable Solutions</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Our products grow with your business, ensuring long-term success.
+              </p>
+            </div>
+            <div className="group p-8 rounded-2xl bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105 transform">
+              <div className="text-4xl mb-4">💡</div>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Expert Support</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Dedicated team of professionals ready to help you succeed.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-32 bg-white">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-medium text-gray-900 mb-8 tracking-tight">
-              Ready to Start Your Project?
+      <section id="contact" className="py-32 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-violet-200/20 via-transparent to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-500">
+              Get in Touch
             </h2>
-            <p className="text-xl text-gray-600 mb-12 leading-relaxed font-light">
-              Let's discuss how we can help bring your vision to life.
+            <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+              Ready to start your journey with us? Drop us a message and let's create something amazing together.
             </p>
-            <button className="bg-purple-600 text-white px-12 py-5 rounded-full text-lg font-medium hover:bg-purple-700 transition-all duration-500 transform hover:scale-105 shadow-lg hover:shadow-xl">
-              Contact Us
-            </button>
+          </div>
+          <div className="max-w-xl mx-auto">
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="w-full px-6 py-4 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 transition-all duration-300"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-700">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  className="w-full px-6 py-4 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 transition-all duration-300"
+                  placeholder="Your message"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white hover:from-violet-700 hover:to-fuchsia-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] transform"
+              >
+                Send Message
+              </button>
+            </form>
           </div>
         </div>
       </section>
