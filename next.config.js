@@ -6,7 +6,7 @@ const nextConfig = {
   },
   trailingSlash: true,
   basePath: '',
-  assetPrefix: '',
+  assetPrefix: '/',
   distDir: 'out',
 };
 
