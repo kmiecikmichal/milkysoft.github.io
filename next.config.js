@@ -6,6 +6,10 @@ const nextConfig = {
   },
   basePath: '/milkysoft.github.io',
   assetPrefix: '/milkysoft.github.io/',
+  // Disable client-side navigation for static export
+  experimental: {
+    disableOptimizedLoading: true,
+  },
 };
 
 module.exports = nextConfig; 

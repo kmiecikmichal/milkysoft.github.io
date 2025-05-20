@@ -32,7 +32,7 @@ jobs:
         run: |
           npm run build
           touch out/.nojekyll
-          cp -r public/* out/
+          cp -r public/* out/ || true
 
       - name: Deploy
         id: deployment
@@ -41,4 +41,5 @@ jobs:
           folder: out
           branch: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
-          clean: true 
+          clean: true
+          single-commit: true 
