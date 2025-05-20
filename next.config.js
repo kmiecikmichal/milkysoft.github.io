@@ -4,9 +4,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '/milkysoft.github.io',
-  assetPrefix: '/milkysoft.github.io/',
-  // Disable client-side navigation for static export
+  // Remove basePath and assetPrefix for now to fix redirect loop
   experimental: {
     disableOptimizedLoading: true,
   },

@@ -32,13 +32,17 @@ jobs:
         run: |
           npm run build
           touch out/.nojekyll
-          cp -r public/* out/ || true
+          # Create a clean deployment directory
+          rm -rf deploy
+          mkdir deploy
+          cp -r out/* deploy/
+          cp out/.nojekyll deploy/
 
       - name: Deploy
         id: deployment
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: out
+          folder: deploy
           branch: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
           clean: true
