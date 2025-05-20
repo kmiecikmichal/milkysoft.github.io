@@ -5,8 +5,8 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
-  basePath: '',
-  assetPrefix: '/',
+  basePath: '/milkysoft.github.io',
+  assetPrefix: '/milkysoft.github.io',
   distDir: 'out',
 };
 
