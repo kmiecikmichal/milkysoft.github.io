@@ -6,7 +6,8 @@ const nextConfig = {
   },
   trailingSlash: true,
   basePath: '/milkysoft.github.io',
-  assetPrefix: '/milkysoft.github.io',
+  assetPrefix: '/milkysoft.github.io/',
+  distDir: 'out',
 };
 
 module.exports = nextConfig; 
