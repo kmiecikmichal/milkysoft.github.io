@@ -2,70 +2,55 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl sm:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">
-            MilkySoft
-          </h1>
-          <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Building the future of web products with modern solutions and innovative technology.
-          </p>
-          <div className="flex gap-6 justify-center">
-            <Link
-              href="#contact"
-              className="group px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
-            >
-              Get Started
-              <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
-            </Link>
-            <Link
-              href="#about"
-              className="group px-8 py-4 rounded-full border-2 border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300 hover:scale-105"
-            >
-              Learn More
-            </Link>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <div className="container relative z-10">
+          <div className="text-center max-w-4xl mx-auto px-4">
+            <h1 className="text-7xl md:text-8xl font-medium text-gray-900 mb-8 leading-none tracking-tight">
+              <span className="text-purple-600">MILKYSOFT</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+              We build innovative software solutions that help businesses grow and succeed in the digital age.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="about" className="py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">
-              Why Choose MilkySoft?
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-              We combine cutting-edge technology with innovative design to create exceptional web experiences.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="py-32 bg-white">
+        <div className="container">
+          <h2 className="text-4xl md:text-5xl font-medium text-center text-gray-900 mb-20 tracking-tight">
+            Why Choose MilkySoft?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
-                title: 'Modern Technology',
-                description: 'Built with the latest web technologies for optimal performance and user experience.',
-                icon: '🚀',
+                title: "Innovative Solutions",
+                description: "Cutting-edge technology and modern approaches to solve complex problems.",
+                icon: "🚀",
+                color: "bg-purple-50"
               },
               {
-                title: 'Scalable Solutions',
-                description: 'Our products grow with your business, ensuring long-term success.',
-                icon: '📈',
+                title: "Expert Team",
+                description: "Skilled professionals with years of experience in software development.",
+                icon: "👥",
+                color: "bg-purple-50"
               },
               {
-                title: 'Expert Support',
-                description: 'Dedicated team of professionals ready to help you succeed.',
-                icon: '💡',
-              },
+                title: "Quality First",
+                description: "We never compromise on quality, ensuring robust and reliable solutions.",
+                icon: "✨",
+                color: "bg-purple-50"
+              }
             ].map((feature, index) => (
-              <div
-                key={index}
-                className="group p-8 rounded-2xl bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{feature.description}</p>
+              <div key={index} className="group p-8 rounded-3xl bg-white hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                <div className={`w-16 h-16 ${feature.color} rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform duration-500`}>
+                  {feature.icon}
+                </div>
+                <h3 className="text-2xl font-medium text-gray-900 mb-4 tracking-tight">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed font-light">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -73,50 +58,53 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">
-              Get in Touch
+      <section className="py-32 bg-white">
+        <div className="container">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-medium text-gray-900 mb-8 tracking-tight">
+              Ready to Start Your Project?
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-              Ready to start your journey with us? Drop us a message and let's create something amazing together.
+            <p className="text-xl text-gray-600 mb-12 leading-relaxed font-light">
+              Let's discuss how we can help bring your vision to life.
             </p>
-          </div>
-          <div className="max-w-xl mx-auto">
-            <form className="space-y-6">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
-                  placeholder="Enter your email"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  rows={4}
-                  className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
-                  placeholder="Your message"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02]"
-              >
-                Send Message
-              </button>
-            </form>
+            <button className="bg-purple-600 text-white px-12 py-5 rounded-full text-lg font-medium hover:bg-purple-700 transition-all duration-500 transform hover:scale-105 shadow-lg hover:shadow-xl">
+              Contact Us
+            </button>
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-50 text-gray-900 py-20">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+              <h3 className="text-2xl font-medium mb-6 tracking-tight">MilkySoft</h3>
+              <p className="text-gray-600 leading-relaxed font-light">
+                Building the future of digital solutions.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-2xl font-medium mb-6 tracking-tight">Contact</h3>
+              <p className="text-gray-600 leading-relaxed font-light">
+                Email: contact@milkysoft.io<br />
+                Phone: +1 (555) 123-4567
+              </p>
+            </div>
+            <div>
+              <h3 className="text-2xl font-medium mb-6 tracking-tight">Follow Us</h3>
+              <div className="flex space-x-6">
+                <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 text-lg font-light">Twitter</a>
+                <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 text-lg font-light">LinkedIn</a>
+                <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 text-lg font-light">GitHub</a>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-200 mt-12 pt-8 text-center text-gray-600 font-light">
+            <p>&copy; {new Date().getFullYear()} MilkySoft. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }

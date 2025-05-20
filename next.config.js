@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
   images: {
     unoptimized: true,
   },
   trailingSlash: true,
-  basePath: '/milkysoft.github.io',
-  assetPrefix: '/milkysoft.github.io',
+  basePath: process.env.NODE_ENV === 'production' ? '/milkysoft.github.io' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/milkysoft.github.io' : '',
   distDir: 'out',
 };
 

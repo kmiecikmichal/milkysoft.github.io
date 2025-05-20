@@ -1,22 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "MilkySoft - Modern Web Solutions",
-  description: "MilkySoft is a web product-oriented startup focused on delivering modern and efficient solutions.",
+  title: "MilkySoft - Modern Software Solutions",
+  description: "Transform your ideas into digital reality with MilkySoft. We build innovative software solutions that help businesses grow and succeed in the digital age.",
+  keywords: "software development, web applications, digital solutions, technology consulting",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}>
+    <html lang="en" className="scroll-smooth">
+      <body className="antialiased">
         {children}
       </body>
     </html>
