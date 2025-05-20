@@ -34,15 +34,15 @@ jobs:
       - name: Create .nojekyll file
         run: touch out/.nojekyll
 
-      - name: Copy routing files
+      - name: Move files to root
         run: |
-          cp public/404.html out/
-          cp public/index.html out/
+          cp -r out/* .
+          cp out/.nojekyll .
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: out
+          folder: .
           branch: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
           clean: true 
