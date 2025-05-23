@@ -89,7 +89,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-500">
-              Why Choose MilkySoft?
+              Why choose MilkySoft?
             </h2>
             <p className="text-gray-700 text-lg max-w-2xl mx-auto">
               We combine cutting-edge technology with innovative design to create exceptional digital experiences.
@@ -207,8 +207,8 @@ export default function Home() {
             <div>
               <h3 className="text-2xl font-medium mb-6 tracking-tight">Follow Us</h3>
               <div className="flex space-x-6">
-                <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 text-lg font-light">LinkedIn</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 text-lg font-light">GitHub</a>
+                <a href="https://www.linkedin.com/company/milkysoft" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 text-lg font-light">LinkedIn</a>
+                <a href="https://www.instagram.com/milkysoft_io?igsh=cWs0dWs5NGJ6dmR5&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 text-lg font-light">Instagram</a>
               </div>
             </div>
           </div>
