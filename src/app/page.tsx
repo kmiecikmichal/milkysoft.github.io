@@ -1,6 +1,58 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Home() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    const formData = new FormData();
+    formData.append('access_key', '10a937ff-a425-42a9-91fa-1342a944e56e');
+    formData.append('email', email);
+    formData.append('message', message);
+    formData.append('subject', 'New Contact Form Submission');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+      console.log('Response from Web3Forms:', data);
+
+      if (data.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Message sent successfully!',
+        });
+        setEmail('');
+        setMessage('');
+      } else {
+        throw new Error(data.message || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Failed to send message. Please try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       {/* Hero Section */}
@@ -82,7 +134,7 @@ export default function Home() {
             </p>
           </div>
           <div className="max-w-xl mx-auto">
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700">
                   Email
@@ -90,6 +142,9 @@ export default function Home() {
                 <input
                   type="email"
                   id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   className="w-full px-6 py-4 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 transition-all duration-300"
                   placeholder="Enter your email"
                 />
@@ -100,16 +155,33 @@ export default function Home() {
                 </label>
                 <textarea
                   id="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
                   rows={4}
                   className="w-full px-6 py-4 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 transition-all duration-300"
                   placeholder="Your message"
                 ></textarea>
               </div>
+              {submitStatus.type && (
+                <div
+                  className={`p-4 rounded-xl ${
+                    submitStatus.type === 'success'
+                      ? 'bg-green-50 text-green-700'
+                      : 'bg-red-50 text-red-700'
+                  }`}
+                >
+                  {submitStatus.message}
+                </div>
+              )}
               <button
                 type="submit"
-                className="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white hover:from-violet-700 hover:to-fuchsia-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] transform"
+                disabled={isSubmitting}
+                className={`w-full px-8 py-4 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white hover:from-violet-700 hover:to-fuchsia-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] transform ${
+                  isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
+                }`}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
