@@ -135,7 +135,6 @@ export default function Home() {
             <div>
               <h3 className="text-2xl font-medium mb-6 tracking-tight">Follow Us</h3>
               <div className="flex space-x-6">
-                <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 text-lg font-light">Twitter</a>
                 <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 text-lg font-light">LinkedIn</a>
                 <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 text-lg font-light">GitHub</a>
               </div>
