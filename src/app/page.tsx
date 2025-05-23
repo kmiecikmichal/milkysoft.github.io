@@ -129,8 +129,7 @@ export default function Home() {
             <div>
               <h3 className="text-2xl font-medium mb-6 tracking-tight">Contact</h3>
               <p className="text-gray-600 leading-relaxed font-light">
-                Email: contact@milkysoft.io<br />
-                Phone: +1 (555) 123-4567
+                Email: contact@milkysoft.io
               </p>
             </div>
             <div>
