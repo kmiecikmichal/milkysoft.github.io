@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -52,6 +52,15 @@ export default function Home() {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (submitStatus.type === 'success') {
+      const timer = setTimeout(() => {
+        setSubmitStatus({ type: null, message: '' });
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus]);
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--color-blue)' }}>
@@ -134,7 +143,7 @@ export default function Home() {
             </p>
           </div>
           <div className="max-w-xl mx-auto">
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-beige)' }}>
                   Email
@@ -143,6 +152,8 @@ export default function Home() {
                   type="email"
                   id="email"
                   required
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
                   style={{ backgroundColor: 'var(--color-beige)', color: 'var(--color-indigo)', border: 'none' }}
                   className="w-full px-6 py-4 rounded-xl"
                   placeholder="Enter your email"
@@ -156,6 +167,8 @@ export default function Home() {
                   id="message"
                   required
                   rows={4}
+                  value={message}
+                  onChange={e => setMessage(e.target.value)}
                   style={{ backgroundColor: 'var(--color-beige)', color: 'var(--color-indigo)', border: 'none' }}
                   className="w-full px-6 py-4 rounded-xl"
                   placeholder="Your message"
@@ -163,12 +176,13 @@ export default function Home() {
               </div>
               <button
                 type="submit"
-                className="w-full px-8 py-4 rounded-xl transition-all duration-300"
+                className="w-full px-8 py-4 rounded-xl transition-all duration-200"
                 style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-beige)', border: 'none', boxShadow: '0 2px 8px var(--color-indigo)33' }}
                 onMouseOver={e => { e.currentTarget.style.backgroundColor = 'var(--color-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
                 onMouseOut={e => { e.currentTarget.style.backgroundColor = 'var(--color-light-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
+                disabled={isSubmitting || submitStatus.type === 'success'}
               >
-                Send Message
+                {submitStatus.type === 'success' ? 'Message sent successfully!' : isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
