@@ -68,7 +68,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-12" style={{ backgroundColor: 'var(--color-blue)' }}>
         <div className="absolute inset-0"></div>
         <div className="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <h1 className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight mb-4 sm:mb-6 font-['Sao_Torpes']" style={{ color: 'var(--color-beige)' }}>
+          <h1 className="text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight mb-4 sm:mb-6 font-['Sao_Torpes']" style={{ color: 'var(--color-beige)' }}>
             MilkySoft
           </h1>
           <p className="text-base xs:text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--color-beige)' }}>
