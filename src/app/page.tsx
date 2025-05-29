@@ -56,19 +56,19 @@ export default function Home() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--color-blue)' }}>
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'var(--color-blue)' }}>
+      <section className="relative min-h-[60vh] sm:min-h-[80vh] flex items-center justify-center overflow-hidden py-12 sm:py-0" style={{ backgroundColor: 'var(--color-blue)' }}>
         <div className="absolute inset-0"></div>
-        <div className="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
-          <h1 className="text-7xl sm:text-9xl font-bold tracking-tight mb-6 font-['Sao_Torpes']" style={{ color: 'var(--color-beige)' }}>
+        <div className="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <h1 className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight mb-4 sm:mb-6 font-['Sao_Torpes']" style={{ color: 'var(--color-beige)' }}>
             MilkySoft
           </h1>
-          <p className="text-xl sm:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--color-beige)' }}>
+          <p className="text-base xs:text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--color-beige)' }}>
             Crafting digital experiences that blend creativity with functionality.
           </p>
-          <div className="flex gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center w-full max-w-xs sm:max-w-none mx-auto">
             <a 
               href="#contact" 
-              className="group px-8 py-4 rounded-full transition-all duration-300"
+              className="group px-8 py-4 rounded-full transition-all duration-300 text-base sm:text-lg"
               style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-beige)', border: 'none', boxShadow: '0 2px 8px var(--color-indigo)33' }}
               onMouseOver={e => { e.currentTarget.style.backgroundColor = 'var(--color-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
               onMouseOut={e => { e.currentTarget.style.backgroundColor = 'var(--color-light-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
@@ -77,7 +77,7 @@ export default function Home() {
             </a>
             <a 
               href="#about" 
-              className="group px-8 py-4 rounded-full border-2 transition-all duration-300"
+              className="group px-8 py-4 rounded-full border-2 transition-all duration-300 text-base sm:text-lg"
               style={{ borderColor: 'var(--color-light-indigo)', color: 'var(--color-beige)', backgroundColor: 'transparent' }}
               onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--color-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
               onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--color-light-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
@@ -100,21 +100,21 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-beige)', color: 'var(--color-blue)', border: 'none', boxShadow: '0 2px 8px var(--color-light-indigo)33' }}>
-              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-light-indigo)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Modern Technology</h3>
-              <p style={{ color: 'var(--color-blue)' }}>
+            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-blue)', border: 'none', boxShadow: '0 2px 8px var(--color-light-indigo)33' }}>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-beige)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Modern Technology</h3>
+              <p style={{ color: 'var(--color-beige)' }}>
                 Built with the latest web technologies for optimal performance and user experience.
               </p>
             </div>
-            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-beige)', color: 'var(--color-blue)', border: 'none', boxShadow: '0 2px 8px var(--color-light-indigo)33' }}>
-              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-light-indigo)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Scalable Solutions</h3>
-              <p style={{ color: 'var(--color-blue)' }}>
+            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-blue)', border: 'none', boxShadow: '0 2px 8px var(--color-light-indigo)33' }}>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-beige)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Scalable Solutions</h3>
+              <p style={{ color: 'var(--color-beige)' }}>
                 Our products grow with your business, ensuring long-term success.
               </p>
             </div>
-            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-beige)', color: 'var(--color-blue)', border: 'none', boxShadow: '0 2px 8px var(--color-light-indigo)33' }}>
-              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-light-indigo)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Expert Support</h3>
-              <p style={{ color: 'var(--color-blue)' }}>
+            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-blue)', border: 'none', boxShadow: '0 2px 8px var(--color-light-indigo)33' }}>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-beige)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Expert Support</h3>
+              <p style={{ color: 'var(--color-beige)' }}>
                 Dedicated team of professionals ready to help you succeed.
               </p>
             </div>
