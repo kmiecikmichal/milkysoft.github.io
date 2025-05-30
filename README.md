@@ -76,12 +76,6 @@ milkysoft.github.io/
 
 ## 🎨 Design Features
 
-- **Color Scheme**
-  - Soft gradient backgrounds (indigo to pink)
-  - Vibrant gradient text effects
-  - Glass-morphism effects
-  - Custom gradient scrollbar
-
 - **Interactive Elements**
   - Hover animations on cards and buttons
   - Scale transitions

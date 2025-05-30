@@ -63,33 +63,33 @@ export default function Home() {
   }, [submitStatus]);
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: 'var(--color-blue)' }}>
+    <main className="min-h-screen" style={{ backgroundColor: 'var(--color-white)' }}>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-12" style={{ backgroundColor: 'var(--color-blue)' }}>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-12" style={{ backgroundColor: 'var(--color-white)' }}>
         <div className="absolute inset-0"></div>
         <div className="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <h1 className="text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight mb-4 sm:mb-6 font-['Sao_Torpes']" style={{ color: 'var(--color-beige)' }}>
+          <h1 className="text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight mb-4 sm:mb-6 font-['Sao_Torpes']" style={{ color: 'var(--color-grey)' }}>
             MilkySoft
           </h1>
-          <p className="text-base xs:text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--color-beige)' }}>
+          <p className="text-base xs:text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--color-grey)' }}>
             Crafting digital experiences that blend creativity with functionality.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center w-full max-w-xs sm:max-w-none mx-auto">
             <a 
               href="#contact" 
               className="group px-8 py-4 rounded-full transition-all duration-300 text-base sm:text-lg"
-              style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-beige)', border: 'none', boxShadow: '0 2px 8px var(--color-indigo)33' }}
-              onMouseOver={e => { e.currentTarget.style.backgroundColor = 'var(--color-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
-              onMouseOut={e => { e.currentTarget.style.backgroundColor = 'var(--color-light-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
+              style={{ backgroundColor: 'var(--color-orange)', color: 'var(--color-white)', border: 'none', boxShadow: '0 2px 8px var(--color-grey)33' }}
+              onMouseOver={e => { e.currentTarget.style.backgroundColor = 'var(--color-grey-light)'; e.currentTarget.style.color = 'var(--color-white)'; }}
+              onMouseOut={e => { e.currentTarget.style.backgroundColor = 'var(--color-orange)'; e.currentTarget.style.color = 'var(--color-white)'; }}
             >
               Get Started
             </a>
             <a 
               href="#about" 
               className="group px-8 py-4 rounded-full border-2 transition-all duration-300 text-base sm:text-lg"
-              style={{ borderColor: 'var(--color-light-indigo)', color: 'var(--color-beige)', backgroundColor: 'transparent' }}
-              onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--color-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
-              onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--color-light-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
+              style={{ borderColor: 'var(--color-grey)', color: 'var(--color-grey)', backgroundColor: 'transparent' }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--color-grey-light)'; e.currentTarget.style.color = 'var(--color-grey-light)'; }}
+              onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--color-grey)'; e.currentTarget.style.color = 'var(--color-grey)'; }}
             >
               Learn More
             </a>
@@ -98,32 +98,32 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="about" className="py-32 relative" style={{ backgroundColor: 'var(--color-blue)' }}>
+      <section id="about" className="py-32 relative" style={{ backgroundColor: 'var(--color-white)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--color-beige)', fontFamily: 'Sao Torpes', borderBottom: '4px solid var(--color-light-indigo)', display: 'inline-block', paddingBottom: '0.25em' }}>
+            <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--color-grey)', fontFamily: 'Sao Torpes', borderBottom: '4px solid var(--color-orange)', display: 'inline-block', paddingBottom: '0.25em' }}>
               Why choose MilkySoft?
             </h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-beige)' }}>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-grey)' }}>
               We combine cutting-edge technology with innovative design to create exceptional digital experiences.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-blue)', border: 'none', boxShadow: '0 2px 8px var(--color-light-indigo)33' }}>
-              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-beige)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Modern Technology</h3>
-              <p style={{ color: 'var(--color-beige)' }}>
+            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-grey-light)', color: 'var(--color-grey)', border: 'none', boxShadow: '0 2px 8px var(--color-grey)33' }}>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-grey)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Modern Technology</h3>
+              <p style={{ color: 'var(--color-grey)' }}>
                 Built with the latest web technologies for optimal performance and user experience.
               </p>
             </div>
-            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-blue)', border: 'none', boxShadow: '0 2px 8px var(--color-light-indigo)33' }}>
-              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-beige)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Scalable Solutions</h3>
-              <p style={{ color: 'var(--color-beige)' }}>
+            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-grey-light)', color: 'var(--color-grey)', border: 'none', boxShadow: '0 2px 8px var(--color-grey)33' }}>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-grey)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Scalable Solutions</h3>
+              <p style={{ color: 'var(--color-grey)' }}>
                 Our products grow with your business, ensuring long-term success.
               </p>
             </div>
-            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-blue)', border: 'none', boxShadow: '0 2px 8px var(--color-light-indigo)33' }}>
-              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-beige)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Expert Support</h3>
-              <p style={{ color: 'var(--color-beige)' }}>
+            <div className="group p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-grey-light)', color: 'var(--color-grey)', border: 'none', boxShadow: '0 2px 8px var(--color-grey)33' }}>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--color-grey)', border: 'none', display: 'inline-block', paddingBottom: '0.1em' }}>Expert Support</h3>
+              <p style={{ color: 'var(--color-grey)' }}>
                 Dedicated team of professionals ready to help you succeed.
               </p>
             </div>
@@ -132,20 +132,20 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-32 relative" style={{ backgroundColor: 'var(--color-blue)' }}>
+      <section id="contact" className="py-32 relative" style={{ backgroundColor: 'var(--color-white)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--color-beige)', fontFamily: 'Sao Torpes', borderBottom: '4px solid var(--color-light-indigo)', display: 'inline-block', paddingBottom: '0.25em' }}>
+            <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--color-grey)', fontFamily: 'Sao Torpes', borderBottom: '4px solid var(--color-orange)', display: 'inline-block', paddingBottom: '0.25em' }}>
               Get in Touch
             </h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-beige)' }}>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-grey)' }}>
               Ready to start your journey with us? Drop us a message and let's create something amazing together.
             </p>
           </div>
           <div className="max-w-xl mx-auto">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-beige)' }}>
+                <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-grey)' }}>
                   Email
                 </label>
                 <input
@@ -154,13 +154,13 @@ export default function Home() {
                   required
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  style={{ backgroundColor: 'var(--color-beige)', color: 'var(--color-indigo)', border: 'none' }}
+                  style={{ backgroundColor: 'transparent', color: 'var(--color-grey)', border: '2px solid var(--color-grey)' }}
                   className="w-full px-6 py-4 rounded-xl"
                   placeholder="Enter your email"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-beige)' }}>
+                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-grey)' }}>
                   Message
                 </label>
                 <textarea
@@ -169,7 +169,7 @@ export default function Home() {
                   rows={4}
                   value={message}
                   onChange={e => setMessage(e.target.value)}
-                  style={{ backgroundColor: 'var(--color-beige)', color: 'var(--color-indigo)', border: 'none' }}
+                  style={{ backgroundColor: 'transparent', color: 'var(--color-grey)', border: '2px solid var(--color-grey)' }}
                   className="w-full px-6 py-4 rounded-xl"
                   placeholder="Your message"
                 ></textarea>
@@ -177,9 +177,9 @@ export default function Home() {
               <button
                 type="submit"
                 className="w-full px-8 py-4 rounded-xl transition-all duration-200"
-                style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-beige)', border: 'none', boxShadow: '0 2px 8px var(--color-indigo)33' }}
-                onMouseOver={e => { e.currentTarget.style.backgroundColor = 'var(--color-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
-                onMouseOut={e => { e.currentTarget.style.backgroundColor = 'var(--color-light-indigo)'; e.currentTarget.style.color = 'var(--color-beige)'; }}
+                style={{ backgroundColor: 'var(--color-orange)', color: 'var(--color-white)', border: 'none', boxShadow: '0 2px 8px var(--color-grey)33' }}
+                onMouseOver={e => { e.currentTarget.style.backgroundColor = 'var(--color-grey-light)'; e.currentTarget.style.color = 'var(--color-white)'; }}
+                onMouseOut={e => { e.currentTarget.style.backgroundColor = 'var(--color-orange)'; e.currentTarget.style.color = 'var(--color-white)'; }}
                 disabled={isSubmitting || submitStatus.type === 'success'}
               >
                 {submitStatus.type === 'success' ? 'Message sent successfully!' : isSubmitting ? 'Sending...' : 'Send Message'}
@@ -190,30 +190,30 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: 'var(--color-light-indigo)', color: 'var(--color-beige)' }} className="py-20 text-center">
+      <footer style={{ backgroundColor: 'var(--color-grey-light)', color: 'var(--color-grey)' }} className="py-20 text-center">
         <div className="container flex flex-col items-center justify-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
             <div>
-              <h3 className="text-2xl font-medium mb-6 tracking-tight" style={{ color: 'var(--color-beige)', fontFamily: 'Sao Torpes', display: 'inline-block', paddingBottom: '0.1em' }}>MilkySoft</h3>
-              <p style={{ color: 'var(--color-beige)' }}>
+              <h3 className="text-2xl font-medium mb-6 tracking-tight" style={{ color: 'var(--color-grey)', fontFamily: 'Sao Torpes', display: 'inline-block', paddingBottom: '0.1em' }}>MilkySoft</h3>
+              <p style={{ color: 'var(--color-grey)' }}>
                 Building the future of digital solutions.
               </p>
             </div>
             <div>
-              <h3 className="text-2xl font-medium mb-6 tracking-tight" style={{ color: 'var(--color-beige)', fontFamily: 'Sao Torpes', display: 'inline-block', paddingBottom: '0.1em' }}>Contact</h3>
-              <p style={{ color: 'var(--color-beige)' }}>
+              <h3 className="text-2xl font-medium mb-6 tracking-tight" style={{ color: 'var(--color-grey)', fontFamily: 'Sao Torpes', display: 'inline-block', paddingBottom: '0.1em' }}>Contact</h3>
+              <p style={{ color: 'var(--color-grey)' }}>
                 Email: contact@milkysoft.io
               </p>
             </div>
             <div>
-              <h3 className="text-2xl font-medium mb-6 tracking-tight" style={{ color: 'var(--color-beige)', fontFamily: 'Sao Torpes', display: 'inline-block', paddingBottom: '0.1em' }}>Follow Us</h3>
+              <h3 className="text-2xl font-medium mb-6 tracking-tight" style={{ color: 'var(--color-grey)', fontFamily: 'Sao Torpes', display: 'inline-block', paddingBottom: '0.1em' }}>Follow Us</h3>
               <div className="flex space-x-6 justify-center">
-                <a href="https://www.linkedin.com/company/milkysoft" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-beige)' }} className="transition-colors duration-300 text-lg font-light">LinkedIn</a>
-                <a href="https://www.instagram.com/milkysoft_io?igsh=cWs0dWs5NGJ6dmR5&utm_source=qr" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-beige)' }} className="transition-colors duration-300 text-lg font-light">Instagram</a>
+                <a href="https://www.linkedin.com/company/milkysoft" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-grey)' }} className="transition-colors duration-300 text-lg font-light">LinkedIn</a>
+                <a href="https://www.instagram.com/milkysoft_io?igsh=cWs0dWs5NGJ6dmR5&utm_source=qr" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-grey)' }} className="transition-colors duration-300 text-lg font-light">Instagram</a>
               </div>
             </div>
           </div>
-          <div className="mt-12 pt-8 text-center" style={{ color: 'var(--color-beige)' }}>
+          <div className="mt-12 pt-8 text-center" style={{ color: 'var(--color-grey)' }}>
             <p>&copy; {new Date().getFullYear()} MilkySoft. All rights reserved.</p>
           </div>
         </div>
