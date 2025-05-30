@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Press_Start_2P } from 'next/font/google';
+import localFont from 'next/font/local';
 
-const pressStart2P = Press_Start_2P({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-press-start-2p',
+const saboFilled = localFont({
+  src: '../../public/fonts/Sabo-Filled.otf',
+  variable: '--font-sabo-filled',
 });
 
 export const metadata: Metadata = {
@@ -21,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${pressStart2P.variable}`}>
+    <html lang="en" className={`scroll-smooth ${saboFilled.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
