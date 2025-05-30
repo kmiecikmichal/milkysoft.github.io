@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Press_Start_2P } from 'next/font/google';
+
+const pressStart2P = Press_Start_2P({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-press-start-2p',
+});
 
 export const metadata: Metadata = {
   title: "MilkySoft - Modern Software Solutions",
@@ -13,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${pressStart2P.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
