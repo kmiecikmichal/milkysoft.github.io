@@ -14,21 +14,22 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
-  themeColor: '#403d39', // Grey theme for main page
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
     title: 'MilkySoft',
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
   other: {
     'msapplication-TileColor': '#403d39',
     'msapplication-config': '/browserconfig.xml',
   },
+};
+
+export const viewport = {
+  themeColor: "#403d39",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
