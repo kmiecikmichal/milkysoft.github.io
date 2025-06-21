@@ -9,11 +9,6 @@
   --color-orange: #ff7f02; 
 }
 
-body {
-  @apply bg-brand-white text-brand-grey;
-  font-family: var(--font-sabo);
-}
-
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     @apply font-medium tracking-tight;
@@ -66,23 +61,6 @@ body {
 /* Gradient text */
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #403d39;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #fff8db;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #ff7f02;
 }
 
 .filter-white {

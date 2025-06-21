@@ -8,7 +8,6 @@ A modern, responsive website built with Next.js and Tailwind CSS, featuring a fu
   - Gradient backgrounds and text effects
   - Glass-morphism UI elements
   - Smooth animations and transitions
-  - Custom scrollbar styling
   - Responsive layout for all devices
 
 - **Technical Stack**

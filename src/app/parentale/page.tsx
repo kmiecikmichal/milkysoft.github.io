@@ -29,6 +29,44 @@ export default function ParentaleApplication() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [remainingTime, setRemainingTime] = useState(180);
 
+  // Set theme color for Parentale page
+  useEffect(() => {
+    // Update theme color meta tags
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', '#3BA181');
+    } else {
+      const newThemeColorMeta = document.createElement('meta');
+      newThemeColorMeta.name = 'theme-color';
+      newThemeColorMeta.content = '#3BA181';
+      document.head.appendChild(newThemeColorMeta);
+    }
+
+    // Update msapplication-TileColor
+    const tileColorMeta = document.querySelector('meta[name="msapplication-TileColor"]');
+    if (tileColorMeta) {
+      tileColorMeta.setAttribute('content', '#3BA181');
+    } else {
+      const newTileColorMeta = document.createElement('meta');
+      newTileColorMeta.name = 'msapplication-TileColor';
+      newTileColorMeta.content = '#3BA181';
+      document.head.appendChild(newTileColorMeta);
+    }
+
+    // Cleanup function to restore original theme color when component unmounts
+    return () => {
+      const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeColorMeta) {
+        themeColorMeta.setAttribute('content', '#403d39');
+      }
+      
+      const tileColorMeta = document.querySelector('meta[name="msapplication-TileColor"]');
+      if (tileColorMeta) {
+        tileColorMeta.setAttribute('content', '#403d39');
+      }
+    };
+  }, []);
+
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
@@ -296,35 +334,35 @@ Submission Date: ${new Date().toLocaleString()}
   };
 
   return (
-    <main className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 lg:p-8">
-      <div className="w-full max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/20">
-        <div className="flex justify-center mb-8">
+    <main className="min-h-screen w-full flex items-center justify-center p-2 sm:p-4 lg:p-8">
+      <div className="w-full max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl border border-white/20">
+        <div className="flex justify-center mb-6 sm:mb-8">
           <Image
             src="/parentale_full_logo.svg"
             alt="Parentale Logo"
-            width={400}
-            height={100}
-            className="filter-white"
+            width={300}
+            height={75}
+            className="filter-white w-64 sm:w-80 lg:w-96"
           />
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="p-6 bg-white/10 rounded-xl border border-white/20 space-y-4 text-white/90">
-            <p className="text-lg font-bold">Cześć!</p>
-            <p>Tu Filip, Bartek i Michał. Wspólnie tworzymy aplikację, która czyta dzieciom bajki… Twoim głosem!</p>
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+          <div className="p-4 sm:p-6 bg-white/10 rounded-xl border border-white/20 space-y-4 text-white/90">
+            <p className="text-base sm:text-lg font-bold">Cześć!</p>
+            <p className="text-sm sm:text-base">Tu Filip, Bartek i Michał. Wspólnie tworzymy aplikację, która czyta dzieciom bajki… Twoim głosem!</p>
             
-            <h3 className="text-lg font-semibold pt-2">Jak to działa?</h3>
-            <p>Nagrywasz krótką próbkę swojego głosu (około 3 minut), a my za pomocą naszych algorytmów tworzymy jego cyfrową wersję, która posłuży nam do stworzenia audiobooka czytanego Twoim głosem. W zamian otrzymasz od nas gotowego audiobooka w formacie MP3, całkowicie za darmo.</p>
+            <h3 className="text-base sm:text-lg font-semibold pt-2">Jak to działa?</h3>
+            <p className="text-sm sm:text-base">Nagrywasz krótką próbkę swojego głosu (około 3 minut), a my za pomocą naszych algorytmów tworzymy jego cyfrową wersję, która posłuży nam do stworzenia audiobooka czytanego Twoim głosem. W zamian otrzymasz od nas gotowego audiobooka w formacie MP3, całkowicie za darmo.</p>
 
-            <h3 className="text-lg font-semibold pt-2">Na jakim etapie jesteśmy?</h3>
-            <p>Jesteśmy we wczesnej fazie rozwoju aplikacji, dlatego Twoja opinia jest dla nas szczególnie cenna. Wystarczy, że prześlesz nam nagranie głosu, a my zajmiemy się resztą. Po odsłuchaniu audiobooka poprosimy Cię o wypełnienie krótkiej ankiety z pytaniami o Twoje wrażenia z korzystania z usługi.</p>
-            <p>Dodatkowo, jeśli zdecydujesz się zostać testerem naszej aplikacji w kolejnych etapach rozwoju, otrzymasz 3 miesiące darmowego dostępu do pełnej wersji.</p>
+            <h3 className="text-base sm:text-lg font-semibold pt-2">Na jakim etapie jesteśmy?</h3>
+            <p className="text-sm sm:text-base">Jesteśmy we wczesnej fazie rozwoju aplikacji, dlatego Twoja opinia jest dla nas szczególnie cenna. Wystarczy, że prześlesz nam nagranie głosu, a my zajmiemy się resztą. Po odsłuchaniu audiobooka poprosimy Cię o wypełnienie krótkiej ankiety z pytaniami o Twoje wrażenia z korzystania z usługi.</p>
+            <p className="text-sm sm:text-base">Dodatkowo, jeśli zdecydujesz się zostać testerem naszej aplikacji w kolejnych etapach rozwoju, otrzymasz 3 miesiące darmowego dostępu do pełnej wersji.</p>
           </div>
 
           {/* Recording Section */}
-          <div className="p-6 bg-white/10 rounded-xl border border-white/20 space-y-4">
-            <h2 className="text-xl font-bold text-center text-white">Nagraj próbkę swojego głosu</h2>
-            <p className="text-center text-white/80 text-base">
+          <div className="p-4 sm:p-6 bg-white/10 rounded-xl border border-white/20 space-y-4">
+            <h2 className="text-lg sm:text-xl font-bold text-center text-white">Nagraj próbkę swojego głosu</h2>
+            <p className="text-center text-white/80 text-sm sm:text-base">
               Nagraj 3 minutową próbkę swojego głosu. Opowiadaj o czymkolwiek. Ważne, aby próbka nagrana była w cichym pomieszczeniu.
             </p>
             
@@ -335,7 +373,7 @@ Submission Date: ${new Date().toLocaleString()}
               <div className="w-full max-w-xs flex justify-center">
                 <div className="relative flex flex-col items-center">
                   {/* Text above button */}
-                  <p className="text-xl font-bold text-white mb-4">
+                  <p className="text-lg sm:text-xl font-bold text-white mb-4 text-center">
                     {isRecording 
                       ? 'Nagrywanie...' 
                       : currentRecording 
@@ -348,7 +386,7 @@ Submission Date: ${new Date().toLocaleString()}
                   <button
                     type="button"
                     onClick={isRecording ? stopRecording : startRecording}
-                    className={`w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 ${
+                    className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 ${
                       isRecording
                         ? 'bg-red-500 text-white hover:bg-red-600 animate-pulse'
                         : currentRecording
@@ -358,17 +396,17 @@ Submission Date: ${new Date().toLocaleString()}
                   >
                     {isRecording ? (
                       // Stop icon (square)
-                      <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="currentColor" viewBox="0 0 20 20">
                         <rect x="6" y="6" width="8" height="8" />
                       </svg>
                     ) : currentRecording ? (
                       // Refresh/record again icon (arrows)
-                      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
                       </svg>
                     ) : (
                       // Microphone icon
-                      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clipRule="evenodd" />
                       </svg>
                     )}
@@ -377,7 +415,7 @@ Submission Date: ${new Date().toLocaleString()}
                   {/* Countdown below button (only during recording) */}
                   {isRecording && (
                     <div className="mt-4 text-center">
-                      <p className="text-lg font-bold text-white tabular-nums">
+                      <p className="text-lg sm:text-xl font-bold text-white tabular-nums">
                         {formatTime(remainingTime)}
                       </p>
                     </div>
@@ -391,7 +429,7 @@ Submission Date: ${new Date().toLocaleString()}
               <>
                 <hr className="border-white/20" />
                 <div className="w-full text-center space-y-4">
-                  <h3 className="text-xl font-bold mb-2 text-white">
+                  <h3 className="text-lg sm:text-xl font-bold mb-2 text-white">
                     Podgląd nagrania
                   </h3>
                   <audio
@@ -409,18 +447,18 @@ Submission Date: ${new Date().toLocaleString()}
           </div>
           
           {/* Personal Info Section */}
-          <div className="p-6 bg-white/10 rounded-xl border border-white/20 space-y-6">
-            <h2 className="text-xl font-bold text-center text-white mb-6">
+          <div className="p-4 sm:p-6 bg-white/10 rounded-xl border border-white/20 space-y-4 sm:space-y-6">
+            <h2 className="text-lg sm:text-xl font-bold text-center text-white mb-4 sm:mb-6">
               Dane kontaktowe
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <input
                 type="text"
                 required
                 placeholder="Imię"
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                className="w-full px-5 py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60"
+                className="w-full px-4 sm:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-base"
               />
               <input
                 type="text"
@@ -428,7 +466,7 @@ Submission Date: ${new Date().toLocaleString()}
                 placeholder="Nazwisko"
                 value={formData.lastName}
                 onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                className="w-full px-5 py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60"
+                className="w-full px-4 sm:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-base"
               />
             </div>
             <input
@@ -437,7 +475,7 @@ Submission Date: ${new Date().toLocaleString()}
               placeholder="Telefon"
               value={formData.phone}
               onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-              className="w-full px-5 py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60"
+              className="w-full px-4 sm:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-base"
             />
             <input
                 type="email"
@@ -445,8 +483,16 @@ Submission Date: ${new Date().toLocaleString()}
                 placeholder="Email"
                 value={formData.email}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                className="w-full px-5 py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60"
+                className="w-full px-4 sm:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-base"
               />
+            <textarea
+              required
+              placeholder="Wiadomość (opcjonalnie)"
+              value={formData.message}
+              onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+              rows={4}
+              className="w-full px-4 sm:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-base"
+            />
           </div>
 
           {/* Consent Checkbox */}
@@ -457,9 +503,9 @@ Submission Date: ${new Date().toLocaleString()}
                 required
                 checked={formData.consent}
                 onChange={(e) => setFormData(prev => ({ ...prev, consent: e.target.checked }))}
-                className="w-5 h-5 mt-1 text-brand-green bg-white/10 border-white/20 rounded focus:ring-2 focus:ring-white/50"
+                className="w-5 h-5 mt-1 text-brand-green bg-white/10 border-white/20 rounded focus:ring-2 focus:ring-white/50 flex-shrink-0"
               />
-              <span className="text-sm leading-relaxed">
+              <span className="text-xs sm:text-sm leading-relaxed">
                 Wyrażam zgodę na udostępnienie swoich danych oraz próbki głosu, które zostaną wykorzystane wyłącznie na potrzeby wygenerowania pojedynczego audiobooka
               </span>
             </label>
@@ -468,9 +514,9 @@ Submission Date: ${new Date().toLocaleString()}
           <button
             type="submit"
             disabled={isSubmitting || isRecording}
-            className="w-full px-8 py-4 font-bold text-xl bg-white text-brand-green rounded-lg transition-all duration-300 hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-6 sm:px-8 py-4 font-bold text-lg sm:text-xl bg-white text-brand-green rounded-lg transition-all duration-300 hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? 'Wysyłanie...' : 'Wyślij formularz'}
+            {isSubmitting ? 'Wysyłanie...' : 'Wyślij zgłoszenie'}
           </button>
         </form>
       </div>

@@ -14,6 +14,21 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
+  themeColor: '#403d39', // Grey theme for main page
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'MilkySoft',
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  },
+  other: {
+    'msapplication-TileColor': '#403d39',
+    'msapplication-config': '/browserconfig.xml',
+  },
 };
 
 export default function RootLayout({
@@ -28,6 +43,12 @@ export default function RootLayout({
         <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
         <meta httpEquiv="Pragma" content="no-cache" />
         <meta httpEquiv="Expires" content="0" />
+        
+        {/* Theme color for browser UI - Main page */}
+        <meta name="theme-color" content="#403d39" />
+        <meta name="msapplication-TileColor" content="#403d39" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body className="font-sabo">
         {children}
