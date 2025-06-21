@@ -334,35 +334,35 @@ Submission Date: ${new Date().toLocaleString()}
   };
 
   return (
-    <main className="min-h-screen w-full flex items-center justify-center p-2 sm:p-4 lg:p-8">
-      <div className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-6 xl:p-8 shadow-2xl border border-white/20">
-        <div className="flex justify-center mb-4 sm:mb-6 lg:mb-8">
+    <main className="min-h-screen w-full flex items-center justify-center p-0 sm:p-4 lg:p-8">
+      <div className="w-full max-w-none sm:max-w-xl lg:max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-none sm:rounded-xl lg:rounded-2xl p-4 sm:p-4 lg:p-6 xl:p-8 shadow-2xl border-0 sm:border sm:border-white/20">
+        <div className="flex justify-center mb-6 sm:mb-6 lg:mb-8">
           <Image
             src="/parentale_full_logo.svg"
             alt="Parentale Logo"
             width={300}
             height={75}
-            className="filter-white w-48 sm:w-64 lg:w-80 xl:w-96"
+            className="filter-white w-56 sm:w-64 lg:w-80 xl:w-96"
           />
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 lg:space-y-6">
-          <div className="p-3 sm:p-4 lg:p-6 bg-white/10 rounded-lg sm:rounded-xl border border-white/20 space-y-3 sm:space-y-4 text-white/90">
-            <p className="text-sm sm:text-base lg:text-lg font-bold">Cześć!</p>
-            <p className="text-xs sm:text-sm lg:text-base">Tu Filip, Bartek i Michał. Wspólnie tworzymy aplikację, która czyta dzieciom bajki… Twoim głosem!</p>
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-4 lg:space-y-6">
+          <div className="p-4 sm:p-4 lg:p-6 bg-white/10 rounded-lg sm:rounded-xl border border-white/20 space-y-4 sm:space-y-4 text-white/90">
+            <p className="text-base sm:text-base lg:text-lg font-bold">Cześć!</p>
+            <p className="text-sm sm:text-sm lg:text-base">Tu Filip, Bartek i Michał. Wspólnie tworzymy aplikację, która czyta dzieciom bajki… Twoim głosem!</p>
             
-            <h3 className="text-sm sm:text-base lg:text-lg font-semibold pt-2">Jak to działa?</h3>
-            <p className="text-xs sm:text-sm lg:text-base">Nagrywasz krótką próbkę swojego głosu (około 3 minut), a my za pomocą naszych algorytmów tworzymy jego cyfrową wersję, która posłuży nam do stworzenia audiobooka czytanego Twoim głosem. W zamian otrzymasz od nas gotowego audiobooka w formacie MP3, całkowicie za darmo.</p>
+            <h3 className="text-base sm:text-base lg:text-lg font-semibold pt-2">Jak to działa?</h3>
+            <p className="text-sm sm:text-sm lg:text-base">Nagrywasz krótką próbkę swojego głosu (około 3 minut), a my za pomocą naszych algorytmów tworzymy jego cyfrową wersję, która posłuży nam do stworzenia audiobooka czytanego Twoim głosem. W zamian otrzymasz od nas gotowego audiobooka w formacie MP3, całkowicie za darmo.</p>
 
-            <h3 className="text-sm sm:text-base lg:text-lg font-semibold pt-2">Na jakim etapie jesteśmy?</h3>
-            <p className="text-xs sm:text-sm lg:text-base">Jesteśmy we wczesnej fazie rozwoju aplikacji, dlatego Twoja opinia jest dla nas szczególnie cenna. Wystarczy, że prześlesz nam nagranie głosu, a my zajmiemy się resztą. Po odsłuchaniu audiobooka poprosimy Cię o wypełnienie krótkiej ankiety z pytaniami o Twoje wrażenia z korzystania z usługi.</p>
-            <p className="text-xs sm:text-sm lg:text-base">Dodatkowo, jeśli zdecydujesz się zostać testerem naszej aplikacji w kolejnych etapach rozwoju, otrzymasz 3 miesiące darmowego dostępu do pełnej wersji.</p>
+            <h3 className="text-base sm:text-base lg:text-lg font-semibold pt-2">Na jakim etapie jesteśmy?</h3>
+            <p className="text-sm sm:text-sm lg:text-base">Jesteśmy we wczesnej fazie rozwoju aplikacji, dlatego Twoja opinia jest dla nas szczególnie cenna. Wystarczy, że prześlesz nam nagranie głosu, a my zajmiemy się resztą. Po odsłuchaniu audiobooka poprosimy Cię o wypełnienie krótkiej ankiety z pytaniami o Twoje wrażenia z korzystania z usługi.</p>
+            <p className="text-sm sm:text-sm lg:text-base">Dodatkowo, jeśli zdecydujesz się zostać testerem naszej aplikacji w kolejnych etapach rozwoju, otrzymasz 3 miesiące darmowego dostępu do pełnej wersji.</p>
           </div>
 
           {/* Recording Section */}
-          <div className="p-3 sm:p-4 lg:p-6 bg-white/10 rounded-lg sm:rounded-xl border border-white/20 space-y-3 sm:space-y-4">
-            <h2 className="text-base sm:text-lg lg:text-xl font-bold text-center text-white">Nagraj próbkę swojego głosu</h2>
-            <p className="text-center text-white/80 text-xs sm:text-sm lg:text-base px-2">
+          <div className="p-4 sm:p-4 lg:p-6 bg-white/10 rounded-lg sm:rounded-xl border border-white/20 space-y-4 sm:space-y-4">
+            <h2 className="text-lg sm:text-lg lg:text-xl font-bold text-center text-white">Nagraj próbkę swojego głosu</h2>
+            <p className="text-center text-white/80 text-sm sm:text-sm lg:text-base px-2">
               Nagraj 3 minutową próbkę swojego głosu. Opowiadaj o czymkolwiek. Ważne, aby próbka nagrana była w cichym pomieszczeniu.
             </p>
             
@@ -373,7 +373,7 @@ Submission Date: ${new Date().toLocaleString()}
               <div className="w-full max-w-xs flex justify-center">
                 <div className="relative flex flex-col items-center">
                   {/* Text above button */}
-                  <p className="text-base sm:text-lg lg:text-xl font-bold text-white mb-3 sm:mb-4 text-center px-2">
+                  <p className="text-lg sm:text-lg lg:text-xl font-bold text-white mb-4 sm:mb-4 text-center px-2">
                     {isRecording 
                       ? 'Nagrywanie...' 
                       : currentRecording 
@@ -386,7 +386,7 @@ Submission Date: ${new Date().toLocaleString()}
                   <button
                     type="button"
                     onClick={isRecording ? stopRecording : startRecording}
-                    className={`w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 ${
+                    className={`w-16 h-16 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 ${
                       isRecording
                         ? 'bg-red-500 text-white hover:bg-red-600 animate-pulse'
                         : currentRecording
@@ -396,17 +396,17 @@ Submission Date: ${new Date().toLocaleString()}
                   >
                     {isRecording ? (
                       // Stop icon (square)
-                      <svg className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-8 h-8 sm:w-8 sm:h-8 lg:w-10 lg:h-10" fill="currentColor" viewBox="0 0 20 20">
                         <rect x="6" y="6" width="8" height="8" />
                       </svg>
                     ) : currentRecording ? (
                       // Refresh/record again icon (arrows)
-                      <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-6 h-6 sm:w-6 sm:h-6 lg:w-8 lg:h-8" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
                       </svg>
                     ) : (
                       // Microphone icon
-                      <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-6 h-6 sm:w-6 sm:h-6 lg:w-8 lg:h-8" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clipRule="evenodd" />
                       </svg>
                     )}
@@ -414,8 +414,8 @@ Submission Date: ${new Date().toLocaleString()}
 
                   {/* Countdown below button (only during recording) */}
                   {isRecording && (
-                    <div className="mt-3 sm:mt-4 text-center">
-                      <p className="text-base sm:text-lg lg:text-xl font-bold text-white tabular-nums">
+                    <div className="mt-4 sm:mt-4 text-center">
+                      <p className="text-lg sm:text-lg lg:text-xl font-bold text-white tabular-nums">
                         {formatTime(remainingTime)}
                       </p>
                     </div>
@@ -428,8 +428,8 @@ Submission Date: ${new Date().toLocaleString()}
             {currentRecording && !isRecording && (
               <>
                 <hr className="border-white/20" />
-                <div className="w-full text-center space-y-3 sm:space-y-4">
-                  <h3 className="text-base sm:text-lg lg:text-xl font-bold mb-2 text-white">
+                <div className="w-full text-center space-y-4 sm:space-y-4">
+                  <h3 className="text-lg sm:text-lg lg:text-xl font-bold mb-2 text-white">
                     Podgląd nagrania
                   </h3>
                   <audio
@@ -447,18 +447,18 @@ Submission Date: ${new Date().toLocaleString()}
           </div>
           
           {/* Personal Info Section */}
-          <div className="p-3 sm:p-4 lg:p-6 bg-white/10 rounded-lg sm:rounded-xl border border-white/20 space-y-3 sm:space-y-4 lg:space-y-6">
-            <h2 className="text-base sm:text-lg lg:text-xl font-bold text-center text-white mb-3 sm:mb-4 lg:mb-6">
+          <div className="p-4 sm:p-4 lg:p-6 bg-white/10 rounded-lg sm:rounded-xl border border-white/20 space-y-4 sm:space-y-4 lg:space-y-6">
+            <h2 className="text-lg sm:text-lg lg:text-xl font-bold text-center text-white mb-4 sm:mb-4 lg:mb-6">
               Dane kontaktowe
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-4 lg:gap-6">
               <input
                 type="text"
                 required
                 placeholder="Imię"
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                className="w-full px-3 sm:px-4 lg:px-5 py-2 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-xs sm:text-sm lg:text-base"
+                className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-sm lg:text-base"
               />
               <input
                 type="text"
@@ -466,7 +466,7 @@ Submission Date: ${new Date().toLocaleString()}
                 placeholder="Nazwisko"
                 value={formData.lastName}
                 onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                className="w-full px-3 sm:px-4 lg:px-5 py-2 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-xs sm:text-sm lg:text-base"
+                className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-sm lg:text-base"
               />
             </div>
             <input
@@ -475,7 +475,7 @@ Submission Date: ${new Date().toLocaleString()}
               placeholder="Telefon"
               value={formData.phone}
               onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-              className="w-full px-3 sm:px-4 lg:px-5 py-2 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-xs sm:text-sm lg:text-base"
+              className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-sm lg:text-base"
             />
             <input
                 type="email"
@@ -483,12 +483,12 @@ Submission Date: ${new Date().toLocaleString()}
                 placeholder="Email"
                 value={formData.email}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                className="w-full px-3 sm:px-4 lg:px-5 py-2 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-xs sm:text-sm lg:text-base"
+                className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-sm lg:text-base"
               />
           </div>
 
           {/* Consent Checkbox */}
-          <div className="p-3 sm:p-4 bg-white/10 rounded-lg border border-white/10">
+          <div className="p-4 sm:p-4 bg-white/10 rounded-lg border border-white/10">
             <label className="flex items-start space-x-3 text-white">
               <input
                 type="checkbox"
@@ -497,7 +497,7 @@ Submission Date: ${new Date().toLocaleString()}
                 onChange={(e) => setFormData(prev => ({ ...prev, consent: e.target.checked }))}
                 className="w-5 h-5 mt-1 text-brand-green bg-white/10 border-white/20 rounded focus:ring-2 focus:ring-white/50 flex-shrink-0"
               />
-              <span className="text-xs sm:text-sm leading-relaxed">
+              <span className="text-sm sm:text-sm leading-relaxed">
                 Wyrażam zgodę na udostępnienie swoich danych oraz próbki głosu, które zostaną wykorzystane wyłącznie na potrzeby wygenerowania pojedynczego audiobooka
               </span>
             </label>
@@ -506,7 +506,7 @@ Submission Date: ${new Date().toLocaleString()}
           <button
             type="submit"
             disabled={isSubmitting || isRecording}
-            className="w-full px-6 sm:px-8 py-4 font-bold text-lg sm:text-xl bg-white text-brand-green rounded-lg transition-all duration-300 hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-6 sm:px-8 py-4 font-bold text-lg sm:text-xl bg-white text-brand-green rounded-lg transition-all duration-300 hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed mb-8 sm:mb-0"
           >
             {isSubmitting ? 'Wysyłanie...' : 'Wyślij zgłoszenie'}
           </button>
