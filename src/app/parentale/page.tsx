@@ -459,6 +459,7 @@ Submission Date: ${new Date().toLocaleString()}
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                 className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-base sm:text-sm lg:text-base"
+                style={{ fontSize: '16px' }}
               />
               <input
                 type="text"
@@ -467,6 +468,7 @@ Submission Date: ${new Date().toLocaleString()}
                 value={formData.lastName}
                 onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
                 className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-base sm:text-sm lg:text-base"
+                style={{ fontSize: '16px' }}
               />
             </div>
             <input
@@ -476,6 +478,7 @@ Submission Date: ${new Date().toLocaleString()}
               value={formData.phone}
               onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
               className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-base sm:text-sm lg:text-base"
+              style={{ fontSize: '16px' }}
             />
             <input
                 type="email"
@@ -484,6 +487,7 @@ Submission Date: ${new Date().toLocaleString()}
                 value={formData.email}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                 className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-base sm:text-sm lg:text-base"
+                style={{ fontSize: '16px' }}
               />
           </div>
 
