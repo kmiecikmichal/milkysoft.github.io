@@ -335,7 +335,7 @@ Submission Date: ${new Date().toLocaleString()}
 
   return (
     <main className="min-h-screen w-full flex items-center justify-center p-0 sm:p-4 lg:p-8">
-      <div className="w-full max-w-none sm:max-w-xl lg:max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-none sm:rounded-xl lg:rounded-2xl p-4 sm:p-4 lg:p-6 xl:p-8 shadow-2xl border-0 sm:border sm:border-white/20">
+      <div className="w-full max-w-none sm:max-w-xl lg:max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-none sm:rounded-xl lg:rounded-2xl p-4 sm:p-4 lg:p-6 xl:p-8 shadow-2xl border-0 sm:border sm:border-white/20 pb-20 sm:pb-0">
         <div className="flex justify-center mb-6 sm:mb-6 lg:mb-8">
           <Image
             src="/parentale_full_logo.svg"
@@ -348,21 +348,21 @@ Submission Date: ${new Date().toLocaleString()}
 
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-4 lg:space-y-6">
           <div className="p-4 sm:p-4 lg:p-6 bg-white/10 rounded-lg sm:rounded-xl border border-white/20 space-y-4 sm:space-y-4 text-white/90">
-            <p className="text-base sm:text-base lg:text-lg font-bold">Cześć!</p>
-            <p className="text-sm sm:text-sm lg:text-base">Tu Filip, Bartek i Michał. Wspólnie tworzymy aplikację, która czyta dzieciom bajki… Twoim głosem!</p>
+            <p className="text-xl sm:text-lg lg:text-xl font-bold">Cześć!</p>
+            <p className="text-base sm:text-sm lg:text-base">Tu Filip, Bartek i Michał. Wspólnie tworzymy aplikację, która czyta dzieciom bajki… Twoim głosem!</p>
             
-            <h3 className="text-base sm:text-base lg:text-lg font-semibold pt-2">Jak to działa?</h3>
-            <p className="text-sm sm:text-sm lg:text-base">Nagrywasz krótką próbkę swojego głosu (około 3 minut), a my za pomocą naszych algorytmów tworzymy jego cyfrową wersję, która posłuży nam do stworzenia audiobooka czytanego Twoim głosem. W zamian otrzymasz od nas gotowego audiobooka w formacie MP3, całkowicie za darmo.</p>
+            <h3 className="text-xl sm:text-lg lg:text-xl font-semibold pt-2">Jak to działa?</h3>
+            <p className="text-base sm:text-sm lg:text-base">Nagrywasz krótką próbkę swojego głosu (około 3 minut), a my za pomocą naszych algorytmów tworzymy jego cyfrową wersję, która posłuży nam do stworzenia audiobooka czytanego Twoim głosem. W zamian otrzymasz od nas gotowego audiobooka w formacie MP3, całkowicie za darmo.</p>
 
-            <h3 className="text-base sm:text-base lg:text-lg font-semibold pt-2">Na jakim etapie jesteśmy?</h3>
-            <p className="text-sm sm:text-sm lg:text-base">Jesteśmy we wczesnej fazie rozwoju aplikacji, dlatego Twoja opinia jest dla nas szczególnie cenna. Wystarczy, że prześlesz nam nagranie głosu, a my zajmiemy się resztą. Po odsłuchaniu audiobooka poprosimy Cię o wypełnienie krótkiej ankiety z pytaniami o Twoje wrażenia z korzystania z usługi.</p>
-            <p className="text-sm sm:text-sm lg:text-base">Dodatkowo, jeśli zdecydujesz się zostać testerem naszej aplikacji w kolejnych etapach rozwoju, otrzymasz 3 miesiące darmowego dostępu do pełnej wersji.</p>
+            <h3 className="text-xl sm:text-lg lg:text-xl font-semibold pt-2">Na jakim etapie jesteśmy?</h3>
+            <p className="text-base sm:text-sm lg:text-base">Jesteśmy we wczesnej fazie rozwoju aplikacji, dlatego Twoja opinia jest dla nas szczególnie cenna. Wystarczy, że prześlesz nam nagranie głosu, a my zajmiemy się resztą. Po odsłuchaniu audiobooka poprosimy Cię o wypełnienie krótkiej ankiety z pytaniami o Twoje wrażenia z korzystania z usługi.</p>
+            <p className="text-base sm:text-sm lg:text-base">Dodatkowo, jeśli zdecydujesz się zostać testerem naszej aplikacji w kolejnych etapach rozwoju, otrzymasz 3 miesiące darmowego dostępu do pełnej wersji.</p>
           </div>
 
           {/* Recording Section */}
           <div className="p-4 sm:p-4 lg:p-6 bg-white/10 rounded-lg sm:rounded-xl border border-white/20 space-y-4 sm:space-y-4">
-            <h2 className="text-lg sm:text-lg lg:text-xl font-bold text-center text-white">Nagraj próbkę swojego głosu</h2>
-            <p className="text-center text-white/80 text-sm sm:text-sm lg:text-base px-2">
+            <h2 className="text-xl sm:text-lg lg:text-xl font-bold text-center text-white">Nagraj próbkę swojego głosu</h2>
+            <p className="text-center text-white/80 text-base sm:text-sm lg:text-base px-2">
               Nagraj 3 minutową próbkę swojego głosu. Opowiadaj o czymkolwiek. Ważne, aby próbka nagrana była w cichym pomieszczeniu.
             </p>
             
@@ -373,7 +373,7 @@ Submission Date: ${new Date().toLocaleString()}
               <div className="w-full max-w-xs flex justify-center">
                 <div className="relative flex flex-col items-center">
                   {/* Text above button */}
-                  <p className="text-lg sm:text-lg lg:text-xl font-bold text-white mb-4 sm:mb-4 text-center px-2">
+                  <p className="text-xl sm:text-lg lg:text-xl font-bold text-white mb-4 sm:mb-4 text-center px-2">
                     {isRecording 
                       ? 'Nagrywanie...' 
                       : currentRecording 
@@ -415,7 +415,7 @@ Submission Date: ${new Date().toLocaleString()}
                   {/* Countdown below button (only during recording) */}
                   {isRecording && (
                     <div className="mt-4 sm:mt-4 text-center">
-                      <p className="text-lg sm:text-lg lg:text-xl font-bold text-white tabular-nums">
+                      <p className="text-xl sm:text-lg lg:text-xl font-bold text-white tabular-nums">
                         {formatTime(remainingTime)}
                       </p>
                     </div>
@@ -429,7 +429,7 @@ Submission Date: ${new Date().toLocaleString()}
               <>
                 <hr className="border-white/20" />
                 <div className="w-full text-center space-y-4 sm:space-y-4">
-                  <h3 className="text-lg sm:text-lg lg:text-xl font-bold mb-2 text-white">
+                  <h3 className="text-xl sm:text-lg lg:text-xl font-bold mb-2 text-white">
                     Podgląd nagrania
                   </h3>
                   <audio
@@ -448,7 +448,7 @@ Submission Date: ${new Date().toLocaleString()}
           
           {/* Personal Info Section */}
           <div className="p-4 sm:p-4 lg:p-6 bg-white/10 rounded-lg sm:rounded-xl border border-white/20 space-y-4 sm:space-y-4 lg:space-y-6">
-            <h2 className="text-lg sm:text-lg lg:text-xl font-bold text-center text-white mb-4 sm:mb-4 lg:mb-6">
+            <h2 className="text-xl sm:text-lg lg:text-xl font-bold text-center text-white mb-4 sm:mb-4 lg:mb-6">
               Dane kontaktowe
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-4 lg:gap-6">
@@ -458,7 +458,7 @@ Submission Date: ${new Date().toLocaleString()}
                 placeholder="Imię"
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-sm lg:text-base"
+                className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-base sm:text-sm lg:text-base"
               />
               <input
                 type="text"
@@ -466,7 +466,7 @@ Submission Date: ${new Date().toLocaleString()}
                 placeholder="Nazwisko"
                 value={formData.lastName}
                 onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-sm lg:text-base"
+                className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-base sm:text-sm lg:text-base"
               />
             </div>
             <input
@@ -475,7 +475,7 @@ Submission Date: ${new Date().toLocaleString()}
               placeholder="Telefon"
               value={formData.phone}
               onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-              className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-sm lg:text-base"
+              className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-base sm:text-sm lg:text-base"
             />
             <input
                 type="email"
@@ -483,21 +483,21 @@ Submission Date: ${new Date().toLocaleString()}
                 placeholder="Email"
                 value={formData.email}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-sm sm:text-sm lg:text-base"
+                className="w-full px-4 sm:px-4 lg:px-5 py-3 sm:py-3 bg-white/10 text-white rounded-lg border border-white/20 focus:ring-2 focus:ring-white/50 focus:outline-none placeholder:text-white/60 text-base sm:text-sm lg:text-base"
               />
           </div>
 
           {/* Consent Checkbox */}
           <div className="p-4 sm:p-4 bg-white/10 rounded-lg border border-white/10">
-            <label className="flex items-start space-x-3 text-white">
+            <label className="flex items-start space-x-1 text-white">
               <input
                 type="checkbox"
                 required
                 checked={formData.consent}
                 onChange={(e) => setFormData(prev => ({ ...prev, consent: e.target.checked }))}
-                className="w-5 h-5 mt-1 text-brand-green bg-white/10 border-white/20 rounded focus:ring-2 focus:ring-white/50 flex-shrink-0"
+                className="w-4 h-4 sm:w-5 sm:h-5 mt-1 text-brand-green bg-white/10 border-white/20 rounded focus:ring-2 focus:ring-white/50 flex-shrink-0"
               />
-              <span className="text-sm sm:text-sm leading-relaxed">
+              <span className="text-base sm:text-sm leading-relaxed">
                 Wyrażam zgodę na udostępnienie swoich danych oraz próbki głosu, które zostaną wykorzystane wyłącznie na potrzeby wygenerowania pojedynczego audiobooka
               </span>
             </label>
@@ -506,7 +506,7 @@ Submission Date: ${new Date().toLocaleString()}
           <button
             type="submit"
             disabled={isSubmitting || isRecording}
-            className="w-full px-6 sm:px-8 py-4 font-bold text-lg sm:text-xl bg-white text-brand-green rounded-lg transition-all duration-300 hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed mb-8 sm:mb-0"
+            className="w-full px-6 sm:px-8 py-4 font-bold text-lg sm:text-xl bg-white text-brand-green rounded-lg transition-all duration-300 hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed" 
           >
             {isSubmitting ? 'Wysyłanie...' : 'Wyślij zgłoszenie'}
           </button>
