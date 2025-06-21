@@ -493,13 +493,21 @@ Submission Date: ${new Date().toLocaleString()}
 
           {/* Consent Checkbox */}
           <div className="p-4 sm:p-4 bg-white/10 rounded-lg border border-white/10">
-            <label className="flex items-start space-x-2 text-white">
+            <label className="flex items-start space-x-3 text-white">
               <input
                 type="checkbox"
                 required
                 checked={formData.consent}
                 onChange={(e) => setFormData(prev => ({ ...prev, consent: e.target.checked }))}
                 className="w-3 h-3 sm:w-4 sm:h-4 mt-1 text-brand-green bg-white/10 border-white/20 rounded focus:ring-2 focus:ring-white/50 flex-shrink-0"
+                style={{ 
+                  width: '16px', 
+                  height: '16px', 
+                  minWidth: '16px', 
+                  minHeight: '16px',
+                  maxWidth: '16px',
+                  maxHeight: '16px'
+                }}
               />
               <span className="text-base sm:text-sm leading-relaxed">
                 Wyrażam zgodę na udostępnienie swoich danych oraz próbki głosu, które zostaną wykorzystane wyłącznie na potrzeby wygenerowania pojedynczego audiobooka
