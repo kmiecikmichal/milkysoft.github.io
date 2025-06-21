@@ -14,6 +14,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'brand-green': '#3BA181',
+        'brand-white': '#fff8db',
+        'brand-grey-light': '#ccc5b9',
+        'brand-grey': '#403d39',
+        'brand-orange': '#ff7f02',
         purple: {
           50: '#faf5ff',
           100: '#f3e8ff',
@@ -28,7 +33,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        sans: ['Helvetica', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        sabo: ['var(--font-sabo)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
