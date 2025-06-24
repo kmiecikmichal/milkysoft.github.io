@@ -140,8 +140,40 @@ export default function ParentaleApplication() {
       mediaRecorder.start();
       setIsRecording(true);
     } catch (err) {
-      console.error('Błąd podczas dostępu do mikrofonu:', err);
-      alert('Błąd podczas dostępu do mikrofonu. Prosimy upewnić się, że masz udzielone pozwolenie i spróbować ponownie.');
+      console.error('Błąd podczas nagrywania:', err);
+      
+      if (err instanceof Error) {
+        // Check for specific error types
+        if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+          // Microphone permission denied
+          console.error('Brak dostępu do mikrofonu:', err);
+          alert('Prosimy o wyrażenie zgody na dostęp do mikrofonu w ustawieniach przeglądarki. Jeśli problem będzie się powtarzał, prosimy o kontakt na adres contact@milkysoft.io');
+        } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+          // No microphone found
+          console.error('Nie znaleziono mikrofonu:', err);
+          alert('Nie znaleziono mikrofonu w urządzeniu. Prosimy upewnić się, że mikrofon jest podłączony i spróbować ponownie. Jeśli problem będzie się powtarzał, prosimy o kontakt na adres contact@milkysoft.io');
+        } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
+          // Microphone is busy or not available
+          console.error('Mikrofon jest zajęty lub niedostępny:', err);
+          alert('Mikrofon jest obecnie zajęty przez inną aplikację lub niedostępny. Prosimy zamknąć inne aplikacje używające mikrofonu i spróbować ponownie. Jeśli problem będzie się powtarzał, prosimy o kontakt na adres contact@milkysoft.io');
+        } else if (err.name === 'OverconstrainedError' || err.name === 'ConstraintNotSatisfiedError') {
+          // Audio constraints not satisfied
+          console.error('Nie można spełnić wymagań audio:', err);
+          alert('Nie można spełnić wymagań dotyczących jakości audio. Prosimy sprawdzić ustawienia mikrofonu i spróbować ponownie. Jeśli problem będzie się powtarzał, prosimy o kontakt na adres contact@milkysoft.io');
+        } else if (err.name === 'TypeError' && err.message.includes('getUserMedia')) {
+          // getUserMedia not supported
+          console.error('getUserMedia nie jest obsługiwane:', err);
+          alert('Twoja przeglądarka nie obsługuje nagrywania audio. Prosimy użyć nowszej przeglądarki lub włączyć obsługę WebRTC. Jeśli problem będzie się powtarzał, prosimy o kontakt na adres contact@milkysoft.io');
+        } else {
+          // Generic recording error
+          console.error('Błąd podczas nagrywania:', err);
+          alert(`Błąd podczas rozpoczynania nagrywania: ${err.message}. Prosimy spróbować ponownie. Jeśli problem będzie się powtarzał, prosimy o kontakt na adres contact@milkysoft.io`);
+        }
+      } else {
+        // Unknown error type
+        console.error('Nieznany błąd podczas nagrywania:', err);
+        alert('Wystąpił nieznany błąd podczas rozpoczynania nagrywania. Prosimy spróbować ponownie. Jeśli problem będzie się powtarzał, prosimy o kontakt na adres contact@milkysoft.io');
+      }
     }
   };
 
