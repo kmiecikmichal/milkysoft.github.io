@@ -6,7 +6,7 @@ import Image from 'next/image';
 interface Recording {
   blob: Blob;
   url: string;
-  mimeType: string;
+  mimeType: string | undefined;
 }
 
 export default function ParentaleApplication() {
@@ -107,15 +107,34 @@ export default function ParentaleApplication() {
       // Get user media stream
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       
-      // Try to use MP3 format first, fallback to WebM if not supported
-      let mimeType = 'audio/mp3';
-      if (!MediaRecorder.isTypeSupported('audio/mp3')) {
-        mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
-          ? 'audio/webm;codecs=opus'
-          : 'audio/webm';
+      // Safari on macOS has very limited MIME type support
+      // Try different MIME types in order of preference
+      const mimeTypes = [
+        'audio/webm;codecs=opus',
+        'audio/webm',
+        'audio/mp4',
+        'audio/ogg;codecs=opus',
+        'audio/ogg',
+        'audio/wav'
+      ];
+      
+      let mimeType: string | undefined;
+      
+      // Find the first supported MIME type
+      for (const type of mimeTypes) {
+        if (MediaRecorder.isTypeSupported(type)) {
+          mimeType = type;
+          break;
+        }
       }
       
-      const mediaRecorder = new MediaRecorder(stream, { mimeType });
+      // If no MIME type is supported, don't specify one (let browser choose default)
+      // This is especially important for Safari on macOS
+      const mediaRecorderOptions = mimeType ? { mimeType } : {};
+      
+      console.log('Using MIME type:', mimeType || 'browser default');
+      
+      const mediaRecorder = new MediaRecorder(stream, mediaRecorderOptions);
       mediaRecorderRef.current = mediaRecorder;
       
       const chunks: BlobPart[] = [];
@@ -127,7 +146,7 @@ export default function ParentaleApplication() {
       };
 
       mediaRecorder.onstop = () => {
-        const blob = new Blob(chunks, { type: mimeType });
+        const blob = new Blob(chunks, { type: mimeType || 'audio/webm' });
         const url = URL.createObjectURL(blob);
         setCurrentRecording({
           blob,
@@ -164,6 +183,10 @@ export default function ParentaleApplication() {
           // getUserMedia not supported
           console.error('getUserMedia nie jest obsługiwane:', err);
           alert('Twoja przeglądarka nie obsługuje nagrywania audio. Prosimy użyć nowszej przeglądarki lub włączyć obsługę WebRTC. Jeśli problem będzie się powtarzał, prosimy o kontakt na adres contact@milkysoft.io');
+        } else if (err.message.includes('Mimetype is not supported') || err.message.includes('mime type')) {
+          // MIME type not supported (common in Safari on macOS)
+          console.error('Nieobsługiwany typ MIME:', err);
+          alert('Twoja przeglądarka nie obsługuje wybranego formatu audio. Prosimy spróbować ponownie lub użyć innej przeglądarki. Jeśli problem będzie się powtarzał, prosimy o kontakt na adres contact@milkysoft.io');
         } else {
           // Generic recording error
           console.error('Błąd podczas nagrywania:', err);
@@ -203,7 +226,20 @@ export default function ParentaleApplication() {
       const timestamp = new Date().toISOString();
       
       // Determine file extension based on the MIME type used
-      const fileExtension = currentRecording.mimeType.startsWith('audio/mp3') ? 'mp3' : 'webm';
+      let fileExtension = 'webm'; // default fallback
+      if (currentRecording.mimeType) {
+        if (currentRecording.mimeType.startsWith('audio/mp3')) {
+          fileExtension = 'mp3';
+        } else if (currentRecording.mimeType.startsWith('audio/mp4')) {
+          fileExtension = 'mp4';
+        } else if (currentRecording.mimeType.startsWith('audio/ogg')) {
+          fileExtension = 'ogg';
+        } else if (currentRecording.mimeType.startsWith('audio/wav')) {
+          fileExtension = 'wav';
+        } else if (currentRecording.mimeType.startsWith('audio/webm')) {
+          fileExtension = 'webm';
+        }
+      }
       
       // Import JSZip dynamically and handle any module errors
       let JSZip;
