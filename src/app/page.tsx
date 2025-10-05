@@ -357,8 +357,13 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="mt-12 pt-8 text-center" style={{ color: 'var(--color-grey)' }}>
-            <p>&copy; {new Date().getFullYear()} MilkySoft. All rights reserved.</p>
+          <div className="mt-12 pt-8 text-center" style={{ color: 'var(--color-white)' }}>
+            <p className="mb-4">
+              <Link href="/privacy-policy" className="hover:underline transition-all duration-300" style={{ color: 'var(--color-white)' }}>
+                Privacy Policy
+              </Link>
+            </p>
+            <p style={{ color: 'var(--color-grey-light)' }}>&copy; {new Date().getFullYear()} MilkySoft. All rights reserved.</p>
           </div>
         </div>
       </footer>

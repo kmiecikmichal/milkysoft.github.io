@@ -578,7 +578,7 @@ Submission Date: ${new Date().toLocaleString()}
                 }}
               />
               <span className="text-base sm:text-sm leading-relaxed">
-                Wyrażam zgodę na udostępnienie swoich danych oraz próbki głosu, które zostaną wykorzystane wyłącznie na potrzeby wygenerowania pojedynczego audiobooka
+                Wyrażam zgodę na udostępnienie swoich danych oraz próbki głosu, które zostaną wykorzystane wyłącznie na potrzeby wygenerowania pojedynczego audiobooka. Więcej informacji w <a href="/privacy-policy" target="_blank" className="underline hover:text-white/70 transition-colors">Polityce Prywatności</a>.
               </span>
             </label>
           </div>
