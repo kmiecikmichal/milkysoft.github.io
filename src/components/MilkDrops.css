@@ -1,0 +1,47 @@
+.milk-drops-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.milk-drop {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--color-primary);
+  border-radius: 50% 50% 50% 0;
+  opacity: 0;
+  animation: dropFall 3s ease-in forwards;
+}
+
+@keyframes dropFall {
+  0% {
+    opacity: 0.8;
+    transform: translateY(-50px) rotate(45deg);
+  }
+  70% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) rotate(45deg);
+  }
+}
+
+.milk-drop::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--cream);
+  border-radius: 50%;
+  transform: scale(0.3);
+  opacity: 0.5;
+}
