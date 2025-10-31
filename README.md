@@ -1,4 +1,4 @@
-# MilkySoft React
+# MilkySoft
 
 A modern React application built with Vite, featuring a responsive website for MilkySoft with multiple sections including Hero, Services, Expertise, Technologies, and more.
 
