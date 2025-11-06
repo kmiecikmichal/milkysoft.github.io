@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './Navbar.css'
+import logo from '../assets/Milkysoft_logo_new.svg'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -31,7 +32,7 @@ const Navbar = () => {
       <div className="container">
         <div className="nav-content">
           <div className="logo">
-            <span className="logo-text">MilkySoft</span>
+            <img src={logo} alt="MilkySoft" className="logo-image" />
           </div>
 
           <ul className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
@@ -56,5 +57,6 @@ const Navbar = () => {
 }
 
 export default Navbar
+
 
 

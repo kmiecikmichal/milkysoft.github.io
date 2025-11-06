@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import './Footer.css'
+import logo from '../assets/Milkysoft_logo_new.svg'
 
 const Footer = () => {
   const scrollToSection = (id) => {
@@ -18,7 +19,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-brand">
-            <h3 className="footer-logo-text">MilkySoft</h3>
+            <img src={logo} alt="MilkySoft" className="footer-logo-image" />
             <p className="footer-tagline">We code, you profit</p>
           </div>
 
