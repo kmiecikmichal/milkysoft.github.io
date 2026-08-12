@@ -7,17 +7,20 @@ import Technologies from './components/Technologies'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 import PrivacyPolicy from './components/PrivacyPolicy'
+import NotFound from './components/NotFound'
 import './App.css'
 
 function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Services />
-      <Expertise />
-      <Technologies />
-      <CTA />
+      <main id="main">
+        <Hero />
+        <Services />
+        <Expertise />
+        <Technologies />
+        <CTA />
+      </main>
       <Footer />
     </>
   )
@@ -26,9 +29,13 @@ function Home() {
 function App() {
   return (
     <div className="app">
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )

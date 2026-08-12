@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
+import { useDocumentLang } from '../hooks/useDocumentLang'
 import './PrivacyPolicy.css'
 
 const PrivacyPolicy = () => {
+  // This document is written in Polish while the rest of the site is English.
+  useDocumentLang('pl')
+
   return (
-    <main className="privacy-policy">
+    <main className="privacy-policy" id="main">
       <div className="container">
         <Link to="/" className="back-link">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -21,7 +25,7 @@ const PrivacyPolicy = () => {
           <section className="privacy-section">
             <h2>Administrator Danych Osobowych</h2>
             <p>
-              <strong>MILKYSOFT Sp. z o.o.</strong> z siedzibą w Krakowie, dalej zwana „Spółką", jest administratorem danych osobowych w rozumieniu ogólnego rozporządzenia o ochronie danych (RODO). Spółka prowadzi działalność <strong>wyłącznie na terenie Unii Europejskiej</strong>, co oznacza, że wszelkie operacje przetwarzania danych osobowych odbywają się w granicach UE. W sprawach związanych z ochroną danych osobowych można skontaktować się ze Spółką pod adresem e-mail: contact@milkysoft.io lub pisemnie na adres siedziby.
+              <strong>MILKYSOFT Sp. z o.o.</strong> z siedzibą w Krakowie, dalej zwana „Spółką&rdquo;, jest administratorem danych osobowych w rozumieniu ogólnego rozporządzenia o ochronie danych (RODO). Spółka prowadzi działalność <strong>wyłącznie na terenie Unii Europejskiej</strong>, co oznacza, że wszelkie operacje przetwarzania danych osobowych odbywają się w granicach UE. W sprawach związanych z ochroną danych osobowych można skontaktować się ze Spółką pod adresem e-mail: contact@milkysoft.io lub pisemnie na adres siedziby.
             </p>
           </section>
 
