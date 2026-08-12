@@ -2,18 +2,103 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Content Security Policy. Note: frame-ancestors / X-Frame-Options cannot be
+         set from a meta tag - they need a real response header (see docs/SECURITY.md). -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self';
+               style-src 'self' 'unsafe-inline';
+               img-src 'self' data:;
+               font-src 'self';
+               connect-src 'self' https://api.web3forms.com;
+               form-action 'self' https://api.web3forms.com;
+               base-uri 'self';
+               object-src 'none';
+               upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <title>Milkysoft — AI &amp; Agentic Solutions</title>
+    <meta
+      name="description"
+      content="Milkysoft is a software house building reliable AI and agentic systems for real business problems. AI consulting, custom development and cloud delivery across the EU."
+    />
+    <link rel="canonical" href="https://milkysoft.io/" />
+    <meta name="theme-color" content="#FFFCF4" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Milkysoft" />
+    <meta property="og:url" content="https://milkysoft.io/" />
+    <meta property="og:title" content="Milkysoft — AI &amp; Agentic Solutions" />
+    <meta
+      property="og:description"
+      content="Reliable AI solutions for real business problems. We code, you profit."
+    />
+    <meta property="og:image" content="https://milkysoft.io/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Milkysoft — We code, you profit" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Milkysoft — AI &amp; Agentic Solutions" />
+    <meta
+      name="twitter:description"
+      content="Reliable AI solutions for real business problems. We code, you profit."
+    />
+    <meta name="twitter:image" content="https://milkysoft.io/og-image.png" />
+
+    <!-- Icons -->
     <link rel="icon" type="image/svg+xml" href="/Milkysoft_logo_small_new.svg" />
     <link rel="icon" type="image/png" href="/Milkysoft_logo_small_new.png" />
     <link rel="shortcut icon" href="/Milkysoft_logo_small_new.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/Milkysoft_logo_small_new.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Milkysoft - AI & Agentic Solutions</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+
+    <!-- Fonts are self-hosted (see src/fonts.css) so that no visitor IP is sent
+         to Google. Preload only the above-the-fold latin faces. -->
+    <link
+      rel="preload"
+      href="/fonts/inter-300-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/alfa-slab-one-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Milkysoft",
+        "legalName": "MILKYSOFT Sp. z o.o.",
+        "url": "https://milkysoft.io/",
+        "logo": "https://milkysoft.io/Milkysoft_logo_small_new.png",
+        "image": "https://milkysoft.io/og-image.png",
+        "description": "Software house building reliable AI and agentic systems for real business problems.",
+        "email": "contact@milkysoft.io",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kraków",
+          "addressCountry": "PL"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/milkysoft",
+          "https://www.instagram.com/milkysoft_io"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

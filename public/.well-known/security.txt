@@ -1,0 +1,5 @@
+# Security contact for milkysoft.io - RFC 9116
+Contact: mailto:contact@milkysoft.io
+Expires: 2027-08-13T00:00:00.000Z
+Preferred-Languages: pl, en
+Canonical: https://milkysoft.io/.well-known/security.txt
