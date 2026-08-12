@@ -6,6 +6,7 @@ const Expertise = () => {
   const [activeIndex, setActiveIndex] = useState(null)
 
   useEffect(() => {
+    const section = sectionRef.current
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -22,13 +23,13 @@ const Expertise = () => {
       { threshold: 0.1 }
     )
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+    if (section) {
+      observer.observe(section)
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
+      if (section) {
+        observer.unobserve(section)
       }
     }
   }, [])
@@ -99,5 +100,3 @@ const Expertise = () => {
 }
 
 export default Expertise
-
-

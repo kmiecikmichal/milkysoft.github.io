@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import './Hero.css'
 
+// Module-level constants: stable identity, so the scroll effect below does not
+// need them as dependencies.
+const phrases = ['build', 'drive', 'scale', 'know']
+const carouselColors = ['#CF6C58', '#3079B5', '#F8CC45']
+
 const Hero = () => {
-  const phrases = ['build', 'drive', 'scale', 'know']
-  const carouselColors = ['#CF6C58', '#3079B5', '#F8CC45']
   const hexToRgba = (hex, alpha) => {
     const h = hex.replace('#', '')
     const full = h.length === 3 ? h.split('').map(c => c + c).join('') : h
@@ -89,7 +92,7 @@ const Hero = () => {
               </p>
               <div className="hero-cta">
                 <button className="cta-btn-primary magnetic-btn" onClick={() => scrollToSection('contact')}>
-                  <span>Let's Talk</span>
+                  <span>Let&apos;s Talk</span>
                   <div className="btn-shine"></div>
                 </button>
                 <button className="cta-btn-secondary magnetic-btn" onClick={() => scrollToSection('expertise')}>
