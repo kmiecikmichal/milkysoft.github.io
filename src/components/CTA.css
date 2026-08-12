@@ -171,3 +171,31 @@
     border-radius: 12px;
   }
 }
+
+/* Honeypot - off-screen rather than display:none, which some bots skip. */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.cta-consent {
+  max-width: 520px;
+  margin: 1.25rem auto 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.cta-consent a {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.cta-consent a:hover {
+  color: var(--secondary);
+}
