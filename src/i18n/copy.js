@@ -10,7 +10,7 @@ const pl = {
   },
   skipLink: 'Przejdź do treści',
   privacy: {
-    metaTitle: 'Polityka Prywatności — Milkysoft',
+    metaTitle: 'Polityka Prywatności - Milkysoft',
     contents: 'Spis treści'
   },
   notFound: {
@@ -341,13 +341,13 @@ const pl = {
 
 const en = {
   meta: {
-    title: 'Milkysoft — AI on your own servers',
+    title: 'Milkysoft - AI on your own servers',
     langLabel: 'Language',
     langName: 'English'
   },
   skipLink: 'Skip to content',
   privacy: {
-    metaTitle: 'Privacy Policy — Milkysoft',
+    metaTitle: 'Privacy Policy - Milkysoft',
     contents: 'Contents'
   },
   notFound: {

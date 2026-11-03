@@ -20,21 +20,21 @@ const ROUTES = [
   {
     path: 'en',
     lang: 'en',
-    title: 'Milkysoft — AI on your own servers',
+    title: 'Milkysoft - AI on your own servers',
     description:
       'We deploy language models on company servers: knowledge bases with chat and custom AI applications. Your data never leaves your network.'
   },
   {
     path: 'privacy-policy',
     lang: 'pl',
-    title: 'Polityka Prywatności — Milkysoft',
+    title: 'Polityka Prywatności - Milkysoft',
     description:
       'Polityka prywatności Milkysoft Sp. z o.o. - zasady przetwarzania danych osobowych zgodnie z RODO, cele, podstawy prawne, okresy przechowywania i prawa osób, których dane dotyczą.'
   },
   {
     path: 'en/privacy-policy',
     lang: 'en',
-    title: 'Privacy Policy — Milkysoft',
+    title: 'Privacy Policy - Milkysoft',
     description:
       'Privacy policy of Milkysoft Sp. z o.o.: how we process personal data under the GDPR, for what purposes and on what legal bases, how long we keep it and your rights.'
   }
