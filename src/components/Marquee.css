@@ -1,0 +1,123 @@
+.marquee {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.marquee-label {
+  padding: 1.75rem 2rem 1.75rem var(--gutter);
+  border-right: 1px solid var(--line);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--ink-strong);
+}
+
+.marquee-track {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.marquee-inner {
+  display: flex;
+  width: max-content;
+  animation: marquee 48s linear infinite;
+}
+
+.marquee:hover .marquee-inner {
+  animation-play-state: paused;
+}
+
+.marquee-row {
+  display: flex;
+  list-style: none;
+}
+
+.marquee-row li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0 2.25rem;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink-strong);
+  white-space: nowrap;
+}
+
+.marquee-row li:nth-child(3n + 1) svg { color: var(--terracotta); }
+.marquee-row li:nth-child(3n + 2) svg { color: var(--blue); }
+.marquee-row li:nth-child(3n + 3) svg { color: var(--teal); }
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-inner {
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .marquee {
+    grid-template-columns: 1fr;
+  }
+
+  .marquee-label {
+    padding: 1rem 1.25rem 0;
+    border-right: 0;
+  }
+
+  .marquee-track {
+    padding: 1rem 0 1.25rem;
+  }
+
+  .marquee-row li {
+    font-size: 1.25rem;
+    padding: 0 1.5rem;
+  }
+}
+
+/* Phones: the strip joins the hero's promise list as one panel, with the
+   label as a small caption instead of a second heading */
+@media (max-width: 640px) {
+  .marquee {
+    background: var(--panel);
+    border-top: 0;
+    border-bottom: 0;
+  }
+
+  .marquee-label {
+    padding: 1.25rem 1.25rem 0;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+
+  .marquee-track {
+    padding: 0.5rem 0 1.5rem;
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .marquee-row li {
+    gap: 0.5rem;
+    padding: 0 1.25rem;
+  }
+
+  .marquee-row svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .marquee-label {
+    padding-inline: 1rem;
+  }
+}

@@ -1,20 +1,53 @@
-/* Global Variables - Warm Color Palette */
+/* Brand tokens (fixed, see CLAUDE.md) */
 :root {
-  --primary: #CF6C58; /* repointed to secondary to avoid pink */
-  --secondary: #CF6C58; /* terracotta - warm secondary */
-  --accent: #3BA181; /* teal - success/alternative */
-  --yellow: #FFD80B; /* bright yellow - alternative accent */
-  --cream: #FFFCF4; /* soft cream - backgrounds */
+  --cream: #FFFCF4;
   --white: #FFFFFF;
+  --ink: #313030;
+  --ink-strong: #1F1E1E;
+  --ink-soft: #6B6866;
+  --line: #E6E1D4;
+  --panel: #F3EFE4; /* the warm grey side panel */
+  --terracotta: #CF6C58;
+  --terracotta-ink: #A8473A; /* terracotta shade that passes 4.5:1 for small text */
+  --teal: #3BA181;
+  --teal-ink: #2C7D63;
+  --blue: #3079B5;
+  --yellow-brand: #F8CC45;
+  --yellow-ink: #9A7400; /* a dark shade of the brand yellow for dots and marks on yellow tints */
+
+  /* Soft tints for avatar grounds, icon chips and bar fills */
+  --tint-yellow: #FBE3A0;
+  --tint-terracotta: #F2CDBF;
+  --tint-teal: #CDE8DD;
+  --tint-blue: #CFE0EE;
+
+  /* Legacy names still used by PrivacyPolicy / NotFound / Footer */
+  --primary: var(--terracotta);
+  --secondary: var(--terracotta);
+  --accent: var(--teal);
+  --yellow: #FFD80B;
   --grey: #FAF8F0;
-  --grey-dark: #E8E6DD;
-  --text: #313030; /* dark charcoal */
-  --text-light: #6B6866;
-  
+  --grey-dark: var(--line);
+  --text: var(--ink);
+  --text-light: var(--ink-soft);
+
+  /* Type: Inter Tight for display, Inter for everything else */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-heading: 'Alfa Slab One', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  
+  --font-heading: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Motion: one rhythm for the whole site */
+  --dur-fast: 120ms;
+  --dur: 220ms;
+  --dur-slow: 420ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease: cubic-bezier(0.65, 0.05, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* For entrances started by scrolling: fast at once, long soft landing. The
+     hero's --ease starts slowly, which on scroll reads as lag. */
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --nav-height: 84px;
+  --gutter: max(1.25rem, calc((100vw - 1280px) / 2 + 2rem));
 }
 
 * {
@@ -23,13 +56,57 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Visually hidden, still announced by screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Keyboard-only escape hatch past the nav. */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 2000;
+  padding: 0.75rem 1.25rem;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top var(--dur) var(--ease-out);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 body {
   font-family: var(--font-primary);
-  color: var(--text);
+  font-size: 1.0625rem;
+  color: var(--ink);
   background: var(--cream);
   line-height: 1.6;
   overflow-x: hidden;
@@ -48,44 +125,385 @@ body {
 }
 
 .section {
-  padding: 6rem 0;
+  padding: 5.5rem 0;
 }
 
+/* Section header (src/ui/SectionHeader.jsx): two-tone title and a short
+   intro. Three layouts so neighbouring sections don't repeat. */
 .section-header {
-  text-align: center;
+  --title-mute: #8C8781; /* 3.5:1 on cream, enough for display-size text */
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1.5rem 5rem;
+  align-items: end;
   margin-bottom: 4rem;
+}
+
+.section-header.is-stack {
+  grid-template-columns: minmax(0, 60rem);
+}
+
+.section-header.is-center {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  text-align: center;
+}
+
+.section-header.is-center .section-title {
+  max-width: 34ch;
 }
 
 .section-title {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
-  color: var(--text);
-  margin-bottom: 1rem;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  color: var(--ink-strong);
+  text-wrap: balance;
+}
+
+/* The grey continuation moves as one piece: beside the statement when it fits,
+   otherwise whole on the next line, never split after its first word */
+.section-title-muted {
+  display: inline-block;
+  color: var(--title-mute);
 }
 
 .section-subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--text-light);
+  max-width: 30rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.is-stack .section-subtitle {
+  max-width: 36rem;
+}
+
+/* Descriptions of things (services, cases, tech, steps, people) are justified.
+   Everything else stays ranged left: headings, section intros, lists, FAQ
+   answers, and all text inside the product demos, which should read like real
+   app screens. Hyphenation (from the page's lang) keeps the word gaps even.
+   On phones they range left (see the 640px block below). */
+.service-description,
+.capability-description,
+.process-description,
+.person-description {
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Buttons: flat at rest, on hover they lift off the page with a hard shadow,
+   on click they press flat. Chips and cards follow the same rule. */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 60px;
+  padding: 0 2.25rem;
+  border: 2px solid var(--ink-strong);
+  border-radius: 999px;
+  font: 600 1.0625rem/1 var(--font-primary);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 0 0 var(--yellow-brand);
+  transition:
+    background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-spring),
+    transform var(--dur) var(--ease-spring);
+}
+
+.btn:hover:not(:disabled) {
+  box-shadow: 5px 5px 0 var(--yellow-brand);
+  transform: translate(-3px, -3px);
+}
+
+/* While lifted (or pressed), an invisible patch keeps covering the spot the
+   button left, so a cursor on its edge stays on it instead of flickering */
+.btn:hover:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  inset: -3px -5px -5px -3px;
+  z-index: -1;
+}
+
+.btn:active:not(:disabled) {
+  box-shadow: 0 0 0 var(--yellow-brand);
+  transform: translate(1px, 1px);
+  transition-duration: var(--dur-fast);
+}
+
+.btn:disabled {
+  cursor: progress;
+}
+
+.btn-primary {
+  background: var(--ink-strong);
+  color: var(--cream);
+}
+
+.btn-light {
+  background: var(--cream);
+  border-color: var(--cream);
+  color: var(--ink-strong);
+}
+
+/* A small round icon chip in a tint of its brand colour. Each colour has one
+   meaning across the page: yellow stays local, terracotta is documents, blue
+   is the model, teal is the deployment, ink is neutral. */
+.icon-chip {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.icon-chip.is-yellow {
+  background: var(--yellow-brand);
+  color: var(--ink-strong);
+}
+
+.icon-chip.is-blue {
+  background: var(--tint-blue);
+  color: var(--blue);
+}
+
+.icon-chip.is-terracotta {
+  background: var(--tint-terracotta);
+  color: var(--terracotta-ink);
+}
+
+.icon-chip.is-teal {
+  background: var(--tint-teal);
+  color: var(--teal-ink);
+}
+
+.icon-chip.is-ink {
+  background: var(--panel);
+  color: var(--ink-strong);
+}
+
+/* A text link with an underline that redraws from the left on hover */
+.link-underline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink-strong);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  height: 1.5px;
+  background: currentColor;
+  transform-origin: right;
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .link-underline:hover::after {
+    animation: underline-redraw 640ms var(--ease) forwards;
+  }
+}
+
+@keyframes underline-redraw {
+  0% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  45% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  46% {
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Entrances, one per section, in the hero's own motion: a title rises out of
+   its own mask (like the hero headline lines) and the intro fades up after it.
+   They run once, when the element first scrolls into view. The hidden start
+   state only applies once src/ui/useReveal.js has set .can-reveal, so without
+   JS or with reduced motion everything is simply there.
+   While waiting, an element is only clipped, not moved: moving it down made the
+   browser see it late, so it started rising after it was already on screen. */
+@media (prefers-reduced-motion: no-preference) {
+  .can-reveal .rise:not(.is-in) {
+    clip-path: inset(-0.3em -0.3em 100% -0.3em);
+  }
+
+  .can-reveal .rise.is-in {
+    animation: rise-in 850ms var(--ease-enter);
+  }
+
+  .can-reveal .rise-fade:not(.is-in) {
+    opacity: 0;
+  }
+
+  .can-reveal .rise-fade.is-in {
+    animation: rise-fade 700ms var(--ease-enter) 120ms backwards;
+  }
+}
+
+/* The clip moves up with the text, so the mask edge stays put on the page */
+@keyframes rise-in {
+  from {
+    transform: translateY(100%);
+    clip-path: inset(-0.3em -0.3em 100% -0.3em);
+  }
+  to {
+    transform: translateY(0);
+    clip-path: inset(-0.3em -0.3em -0.3em -0.3em);
+  }
+}
+
+@keyframes rise-fade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (max-width: 900px) {
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+  }
 }
 
 @media (max-width: 768px) {
+  :root {
+    --nav-height: 68px;
+  }
   .container {
     padding: 0 1.25rem;
   }
   .section {
-    padding: 3rem 0;
+    padding: 4.5rem 0;
+  }
+}
+
+/* Phones: the desktop sizes read as stretched on a small screen, so body text
+   and section spacing step down here. Desktop is not affected. Justified text
+   leaves wide gaps in a 360px column, so descriptions range left. */
+@media (max-width: 640px) {
+  :root {
+    --nav-height: 60px;
+  }
+  body {
+    font-size: 1rem;
+  }
+  .section {
+    padding: 2.5rem 0;
   }
   .section-header {
-    margin-bottom: 2.5rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
+  /* A centred title over a left-aligned list makes the eye jump back to the
+     edge on a narrow screen; every section starts at the same left line */
+  .section-header.is-center {
+    justify-items: start;
+    text-align: left;
+  }
+  .service-description,
+  .capability-description,
+  .process-description,
+  .person-description {
+    text-align: left;
+    hyphens: manual;
+    -webkit-hyphens: manual;
+  }
+}
+
+/* Phone type scale. Every text outside the product demos takes one of five
+   roles, all set here, so the sections cannot drift apart again:
+     H2      30  section titles
+     H3      20  any item title (service, case, technology, step, question)
+     figure  24  fact values, first names and the menu links
+     text    15  any paragraph or list
+     meta    13  labels, captions, small headings
+   The hero (headline and lead) and the demos (knowledge-base card, deed) keep
+   their own sizes. Section CSS files must not set font sizes for phones. */
+@media (max-width: 640px) {
   .section-title {
-    font-size: clamp(1.75rem, 8vw, 2.5rem);
-    margin-bottom: 0.75rem;
+    font-size: 1.875rem;
   }
-  .section-subtitle {
-    font-size: clamp(0.95rem, 3vw, 1.1rem);
-    padding: 0 0.5rem;
+
+  .service-title,
+  .case-title,
+  .capability-title,
+  .process-title,
+  .faq-item summary,
+  .pilot-soon-title,
+  .marquee-row li,
+  .footer-tagline {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+  }
+
+  .fact-tile-value,
+  .fact-tile.is-wide .fact-tile-value,
+  .person-name,
+  .nav-links a {
+    font-size: 1.5rem;
+  }
+
+  .section-subtitle,
+  .case-copy,
+  .service-description,
+  .capability-description,
+  .process-description,
+  .person-description,
+  .faq-item p {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+
+  .case-copy {
+    color: var(--ink-soft);
+  }
+
+  .service-features,
+  .hero-promises a,
+  .footer-column a {
+    font-size: 0.9375rem;
+  }
+
+  .case-meta,
+  .marquee-label,
+  .fact-tile-label,
+  .person-role,
+  .footer-column h2,
+  .footer-bottom {
+    font-size: 0.8125rem;
   }
 }
 
@@ -93,7 +511,24 @@ body {
   .container {
     padding: 0 1rem;
   }
-  .section {
-    padding: 2.5rem 0;
+  .btn {
+    min-height: 56px;
+  }
+}
+
+/* Set while the mobile menu is open, so the page under it does not scroll */
+.menu-locked {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-delay: 0s !important;
+    transition-delay: 0s !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

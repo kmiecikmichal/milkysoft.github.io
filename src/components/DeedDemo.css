@@ -1,0 +1,346 @@
+/* The deed demo: the same dark card as the hero's knowledge base, with a sheet
+   of paper on the left and the form the agent fills on the right */
+.deed {
+  margin: 0;
+}
+
+.deed-card {
+  padding: 1.25rem 1.25rem 1rem;
+  background: var(--ink-strong);
+  border-radius: 20px;
+  color: var(--cream);
+  box-shadow: 0 30px 60px -30px rgba(31, 30, 30, 0.45);
+}
+
+.deed-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  font-size: 0.8125rem;
+}
+
+.deed-title {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.deed-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 252, 244, 0.12);
+  color: rgba(255, 252, 244, 0.8);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* The ellipsis needs its own box: on the flex chip it never showed, the name
+   was just cut off */
+.deed-file-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deed-file svg {
+  flex-shrink: 0;
+  color: var(--terracotta);
+}
+
+.deed-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-shrink: 0;
+  margin-left: auto;
+  color: rgba(255, 252, 244, 0.8);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* A greyed, struck-through wifi: the agent works with no connection */
+.deed-offline {
+  flex-shrink: 0;
+  color: rgba(255, 252, 244, 0.5);
+}
+
+.deed-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* ---------- The paper ---------- */
+.deed-paper {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 1rem 1.125rem;
+  border-radius: 10px;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.deed-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--ink-strong);
+}
+
+.deed-ref {
+  margin-bottom: 0.625rem;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.deed-text + .deed-text {
+  margin-top: 0.5rem;
+}
+
+.deed-hit {
+  padding: 0 0.1em;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition:
+    background-color var(--dur-slow) var(--ease-out),
+    box-shadow var(--dur-slow) var(--ease-out);
+}
+
+.deed-hit.is-found {
+  background: var(--tint-yellow);
+}
+
+.deed-hit.is-current {
+  background: var(--yellow-brand);
+  box-shadow: 0 0 0 2px var(--yellow-brand);
+}
+
+/* A band of light that sweeps the page while the agent reads it */
+.deed-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(248, 204, 69, 0), rgba(248, 204, 69, 0.35), rgba(248, 204, 69, 0));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.deed-paper.is-reading .deed-scan {
+  opacity: 1;
+  animation: deed-scan 1.5s linear infinite;
+}
+
+@keyframes deed-scan {
+  from {
+    transform: translateY(-48px);
+  }
+  to {
+    transform: translateY(420px);
+  }
+}
+
+/* ---------- The form ---------- */
+.deed-fields-title {
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 252, 244, 0.6);
+}
+
+.deed-field {
+  padding: 0.3125rem 0;
+  border-bottom: 1px solid rgba(255, 252, 244, 0.1);
+}
+
+.deed-field dt {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: rgba(255, 252, 244, 0.62);
+}
+
+.deed-derived {
+  padding: 0 0.375rem;
+  border-radius: 999px;
+  background: rgba(248, 204, 69, 0.18);
+  color: var(--yellow-brand);
+  font-weight: 600;
+}
+
+.deed-field dd {
+  min-height: 1.35rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.deed-value {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+  animation: deed-pop 420ms var(--ease-spring);
+}
+
+.deed-value svg {
+  flex-shrink: 0;
+  margin-top: 0.15em;
+  color: var(--teal);
+}
+
+@keyframes deed-pop {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+
+/* The placeholder for a value not found yet (see the phone rules below) */
+.deed-value.is-ghost {
+  display: none;
+}
+
+.deed-skeleton {
+  display: block;
+  width: 70%;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 252, 244, 0.1);
+}
+
+.deed-field:nth-child(odd) .deed-skeleton {
+  width: 52%;
+}
+
+/* ---------- Time ---------- */
+.deed-time {
+  display: grid;
+  gap: 0.375rem;
+  margin-top: 1rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid rgba(255, 252, 244, 0.14);
+  font-size: 0.8125rem;
+  color: rgba(255, 252, 244, 0.75);
+}
+
+.deed-time-row {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.deed-bar {
+  position: relative;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 252, 244, 0.08);
+}
+
+.deed-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+}
+
+.deed-bar--manual::after {
+  width: 100%;
+  background: rgba(255, 252, 244, 0.4);
+}
+
+/* The agent's bar grows with the form; at the end it is about a twentieth of
+   the manual one, close to the client's estimate */
+.deed-bar--agent::after {
+  width: calc(var(--progress) * 6%);
+  min-width: 0;
+  background: var(--yellow-brand);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+
+.deed-time-value {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.deed-time-value.is-agent {
+  color: var(--yellow-brand);
+}
+
+.deed-note {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: rgba(255, 252, 244, 0.6);
+}
+
+.deed-caption {
+  margin-top: 0.625rem;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 560px) {
+  .deed-card {
+    padding: 1rem 0.875rem 0.875rem;
+  }
+
+  .deed-body {
+    grid-template-columns: 1fr;
+  }
+
+  /* The form goes into two columns, so the page and the fields it fills fit on
+     one phone screen and the link between them stays visible */
+  .deed-fields dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 0.875rem;
+  }
+
+  .deed-field dd {
+    display: grid;
+    align-items: start;
+    font-size: 0.75rem;
+  }
+
+  /* In half a phone screen some values wrap to two lines, so the card grew as
+     they were filled. The hidden value holds the row at its final height and
+     the skeleton lies over its first line. */
+  .deed-value,
+  .deed-skeleton {
+    grid-area: 1 / 1;
+  }
+
+  .deed-value.is-ghost {
+    display: inline-flex;
+    visibility: hidden;
+    animation: none;
+  }
+
+  .deed-skeleton {
+    margin-top: calc((1.35em - 0.5rem) / 2);
+  }
+
+  .deed-time-row {
+    grid-template-columns: 3.75rem minmax(0, 1fr) auto;
+    gap: 0.5rem;
+  }
+}

@@ -1,166 +1,428 @@
+/* Nav: logo left, section links centred, language and the call to action right.
+   A hairline under it, as in the reference. */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  /* Glassmorphism background */
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.28) 0%,
-    rgba(255, 255, 255, 0.18) 100%
-  );
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  backdrop-filter: blur(16px) saturate(160%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+  transition: background-color var(--dur) var(--ease-out);
 }
 
 .navbar.scrolled {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.35) 0%,
-    rgba(255, 255, 255, 0.22) 100%
-  );
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border-bottom-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 252, 244, 0.92);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .nav-content {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  /* Equal sides keep the links centred on the page; the sides never shrink
+     below their content, so the CTA is never squeezed into two lines */
+  grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+  column-gap: 2rem;
   align-items: center;
-  padding: 1.25rem 0;
+  height: var(--nav-height);
 }
 
 .logo {
   display: flex;
   align-items: center;
+  justify-self: start;
+  border-radius: 6px;
 }
 
 .logo-image {
-  height: 2rem;
+  display: block;
+  height: 2.125rem;
   width: auto;
-  object-fit: contain;
+}
+
+/* The wordmark sits low in the logo's box. Lift the logo so the wordmark's
+   capitals share a centre line with the section links. */
+@media (min-width: 1101px) {
+  .logo-image {
+    translate: 0 -14%;
+  }
+}
+
+.nav-panel {
+  display: contents;
 }
 
 .nav-links {
+  position: relative;
   display: flex;
-  gap: 2.5rem;
-  list-style: none;
   align-items: center;
-  margin: 0;
+  gap: clamp(1.5rem, 2.6vw, 2.75rem);
+  list-style: none;
 }
 
 .nav-links a {
-  color: var(--text);
-  text-decoration: none;
+  display: block;
+  padding: 0.5rem 0;
+  color: var(--ink-strong);
+  font-size: 0.96875rem;
   font-weight: 500;
-  transition: color 0.3s;
-  cursor: pointer;
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary);
-  transition: width 0.3s var(--ease);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--dur) var(--ease-out);
 }
 
 .nav-links a:hover {
-  color: var(--secondary);
+  color: var(--ink-soft);
 }
 
-.nav-links a:hover::after {
-  width: 100%;
+/* One underline that travels to the active section */
+.nav-indicator {
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink-strong);
+  pointer-events: none;
+  transition:
+    transform var(--dur-slow) var(--ease-out),
+    width var(--dur-slow) var(--ease-out),
+    opacity var(--dur) var(--ease-out);
+}
+
+.nav-end {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  justify-self: end;
+}
+
+/* Language: both options visible and a filled thumb that slides to the
+   current one, so it reads as a switch rather than a stray abbreviation */
+.nav-lang {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.nav-lang::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  border-radius: 999px;
+  background: var(--ink-strong);
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.nav-lang[data-current='en']::before {
+  transform: translateX(100%);
+}
+
+.nav-lang-option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 36px;
+  padding: 0 0.75rem;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: color var(--dur-slow) var(--ease);
+}
+
+a.nav-lang-option:not(.is-current):hover {
+  color: var(--ink-strong);
+}
+
+.nav-lang-option.is-current {
+  color: var(--cream);
 }
 
 .nav-cta {
-  padding: 0.7rem 1.8rem;
-  background: var(--secondary);
-  color: var(--text);
-  border: none;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.3s var(--ease);
-  box-shadow: 0 4px 15px rgba(207, 108, 88, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-height: 48px;
+  white-space: nowrap;
+  color: var(--ink-strong);
+  font-size: 0.96875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
 }
 
-.nav-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(207, 108, 88, 0.4);
+.nav-cta-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink-strong);
+  color: var(--cream);
+  box-shadow: 0 0 0 var(--yellow-brand);
+  transition:
+    transform var(--dur) var(--ease-spring),
+    box-shadow var(--dur) var(--ease-spring);
+}
+
+.nav-cta:hover .nav-cta-icon {
+  transform: translate(-2px, -2px) rotate(45deg);
+  box-shadow: 4px 4px 0 var(--yellow-brand);
 }
 
 .mobile-menu-toggle {
   display: none;
+  position: relative;
+  justify-self: end;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
   background: none;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
-  flex-direction: column;
-  gap: 5px;
 }
 
 .mobile-menu-toggle span {
-  width: 25px;
-  height: 3px;
-  background: var(--text);
-  transition: all 0.3s;
+  position: absolute;
+  left: 11px;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink-strong);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.mobile-menu-toggle span:first-child {
+  transform: translateY(-4px);
+}
+
+.mobile-menu-toggle span:last-child {
+  transform: translateY(4px);
+}
+
+.menu-open .mobile-menu-toggle span:first-child {
+  transform: rotate(45deg);
+}
+
+.menu-open .mobile-menu-toggle span:last-child {
+  transform: rotate(-45deg);
+}
+
+/* Below 1100px the logo, four links, the CTA and the language switch no longer
+   fit on one row (iPad landscape included), so the links fold into the menu */
+@media (max-width: 1100px) {
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .logo-image {
+    height: 1.875rem;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .nav-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    /* A phone held sideways is shorter than the menu; let the panel scroll */
+    max-height: calc(100dvh - var(--nav-height));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    /* same side padding as .container, so the items line up with the logo */
+    padding: 0.5rem 2rem 1.5rem;
+    background: var(--cream);
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition:
+      opacity var(--dur) var(--ease-out),
+      transform var(--dur) var(--ease-out),
+      visibility 0s linear var(--dur);
+  }
+
+  .menu-open .nav-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity var(--dur) var(--ease-out),
+      transform var(--dur) var(--ease-out);
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .nav-links a {
+    padding: 1rem 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-indicator {
+    display: none;
+  }
+
+  .nav-end {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 1rem;
+  }
+
+  /* Dims the page under the open menu, so the menu reads as a layer above it */
+  /* Absolute, not fixed: the scrolled navbar's backdrop-filter would make a
+     fixed child size itself to the bar instead of the viewport */
+  .nav-backdrop {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: calc(100dvh - var(--nav-height));
+    background: rgba(31, 30, 30, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--dur) var(--ease-out),
+      visibility 0s linear var(--dur);
+  }
+
+  .menu-open .nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity var(--dur) var(--ease-out);
+  }
+}
+
+@media (min-width: 1101px) {
+  .nav-backdrop {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
-  .nav-content {
-    padding: 1rem 0;
-  }
-  
-  .logo-image {
-    height: 1.8rem;
-  }
-  
-  .mobile-menu-toggle {
-    display: none; /* hide hamburger menu on mobile */
-  }
-  
-  .mobile-menu-toggle span {
-    width: 22px;
-    height: 2.5px;
-  }
-  
-  .nav-cta {
-    display: none;
-  }
-  
-  .nav-links {
-    display: none !important; /* hide menu on mobile */
-  }
-  
-  .nav-links a {
-    font-size: 1.1rem;
-    padding: 0.75rem 2rem;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav-links a::after {
-    display: none;
+  .nav-panel {
+    padding-inline: 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
-  .logo-image {
-    height: 1.6rem;
+  .nav-panel {
+    padding-inline: 1rem;
   }
-  
-  .nav-links {
-    width: 100%;
-    max-width: 100%;
+}
+
+/* Phones: the menu is a sheet over the whole screen, not a dropdown. Big links
+   for a thumb, and the call to action as a full-width button at the bottom,
+   where the thumb already is. */
+@media (max-width: 640px) {
+  .logo-image {
+    height: 1.625rem;
+  }
+
+  .nav-panel {
+    height: calc(100dvh - var(--nav-height));
+    max-height: none;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+    border-bottom: 0;
+  }
+
+  /* The sheet covers the page, so there is nothing to dim */
+  .nav-backdrop {
+    display: none;
+  }
+
+  .nav-links a {
+    padding: 0.875rem 0;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  /* The bar joins the sheet: no page showing through it */
+  .navbar.menu-open {
+    background: var(--cream);
+  }
+
+  /* The current section gets a yellow dot; a grey link read as disabled */
+  .nav-links a.active::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-left: 0.625rem;
+    border-radius: 50%;
+    background: var(--yellow-brand);
+    vertical-align: 0.2em;
+  }
+
+  .nav-end {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  .nav-cta {
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 56px;
+    border-radius: 999px;
+    background: var(--ink-strong);
+    color: var(--cream);
+    font-size: 1rem;
+  }
+
+  .nav-cta-icon {
+    width: auto;
+    height: auto;
+    background: none;
+  }
+
+  .nav-cta:hover .nav-cta-icon {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .nav-lang {
+    align-self: center;
+  }
+}
+
+/* A phone held sideways is too short for a full sheet with the button at the
+   bottom; the panel scrolls instead */
+@media (max-width: 640px) and (max-height: 500px) {
+  .nav-panel {
+    height: auto;
+    max-height: calc(100dvh - var(--nav-height));
   }
 }

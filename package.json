@@ -2,35 +2,39 @@
   "name": "milkysoft_io",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/postbuild.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
-    "deploy": "npm run build && cp dist/index.html dist/404.html && echo '' > dist/.nojekyll && gh-pages -d dist --dotfiles"
+    "fonts": "bash scripts/fetch-fonts.sh",
+    "deploy": "npm run build && gh-pages -d dist --dotfiles"
   },
   "dependencies": {
-    "file-saver": "^2.0.5",
-    "googleapis": "^150.0.1",
-    "jszip": "^3.10.1",
-    "lamejs": "^1.2.1",
-    "nodemailer": "^7.0.3",
+    "@phosphor-icons/react": "^2.1.7",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-router-dom": "^7.9.5"
+    "react-router-dom": "^7.18.2"
   },
   "devDependencies": {
-    "@types/file-saver": "^2.0.7",
+    "@eslint/js": "^9.39.5",
     "@types/node": "^20.19.0",
-    "@types/nodemailer": "^6.4.17",
     "@types/react": "18.3.21",
     "@types/react-dom": "18.3.7",
     "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.21",
-    "eslint": "8.57.1",
+    "eslint": "^9.39.5",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.5.4",
     "gh-pages": "^6.3.0",
+    "globals": "^17.11.0",
     "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.17",
     "typescript": "5.4.5",
     "vite": "^7.1.7"
   }

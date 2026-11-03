@@ -1,1 +1,29 @@
+# Dependencies
 node_modules
+
+# Build output - built by CI, never committed.
+# /assets is a stale copy of a Vite build at the repo root; src/assets is real
+# source and must stay tracked, hence the leading slash.
+/dist
+/assets
+.vite
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+*.swp
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+
+# Local tooling output: Playwright MCP snapshots/logs, personal Claude settings
+.playwright-mcp/
+.claude/settings.local.json

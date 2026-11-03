@@ -1,261 +1,465 @@
-.expertise {
-  background: var(--cream);
-  padding: 6rem 0;
-  position: relative;
-  overflow: hidden;
+/* Two case studies, each laid out like the hero: copy on cream, a colour panel
+   that runs to the edge of the screen. The live one has the warm grey panel
+   with the deed demo overlapping its edge (as the hero card does); the pilot
+   mirrors it, with its fact tiles on brand yellow. Panels are full-bleed and
+   square; only cards (objects) get rounded corners. */
+.expertise.section {
+  padding-bottom: 0;
 }
 
-.expertise-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
+.expertise .section-header {
+  margin-bottom: 3.5rem;
 }
 
-.expertise-header {
-  margin-bottom: 4rem;
-  text-align: center;
-}
-
-.expertise-title {
-  font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.projects-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.project-row {
+.case {
   display: grid;
-  grid-template-columns: 180px 1fr 60px;
-  align-items: center;
-  gap: 2.5rem;
-  padding: 2rem 3rem;
-  border-bottom: 2px solid var(--grey-dark);
-  cursor: pointer;
-  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
-  background: var(--cream);
-  will-change: background, border-color;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
 }
 
-.project-row:hover,
-.project-row.active {
-  background: rgba(207, 108, 88, 0.12);
-  border-bottom-color: var(--secondary);
-  box-shadow: 0 8px 30px rgba(207, 108, 88, 0.2);
+.case--live {
+  grid-template-areas:
+    'text panel'
+    'facts panel';
+  grid-template-rows: auto 1fr;
 }
 
-/* Stat Block */
-.project-stat-block {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+/* The text column keeps a clear gap to the demo card, which reaches back over
+   the panel edge by less than this padding */
+.case--live .case-text {
+  grid-area: text;
+  padding: 3rem 5.5rem 0 var(--gutter);
 }
 
-.project-stat {
-  font-family: var(--font-heading);
-  font-size: clamp(2.25rem, 3vw, 3rem);
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  transition: color 0.3s;
+.case--live > .case-facts {
+  grid-area: facts;
+  padding: 2.5rem 5.5rem 5rem var(--gutter);
 }
 
-.project-row:hover .project-stat,
-.project-row.active .project-stat {
-  color: var(--secondary);
-}
-
-.project-label {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: color 0.3s;
-}
-
-.project-row:hover .project-label,
-.project-row.active .project-label {
-  color: var(--secondary);
-}
-
-/* Content */
-.project-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.project-title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 2vw, 2rem);
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.2;
-  transition: color 0.3s;
-}
-
-.project-row:hover .project-title,
-.project-row.active .project-title {
-  color: var(--secondary);
-}
-
-.project-description {
-  color: var(--text-light);
-  line-height: 1.6;
-  font-size: 1rem;
-  max-width: 600px;
-  transition: color 0.3s;
-}
-
-.project-row:hover .project-description,
-.project-row.active .project-description {
-  color: var(--text);
-}
-
-/* Arrow */
-.project-arrow {
-  width: 50px;
-  height: 50px;
+.case-panel {
+  grid-area: panel;
   display: flex;
   align-items: center;
+}
+
+.case--live .case-panel {
+  padding: 4rem var(--gutter) 5rem 0;
+  background: var(--panel);
+}
+
+.case--live .deed {
+  width: calc(100% + 2rem);
+  margin-left: -2rem;
+}
+
+@media (max-width: 1180px) {
+  .case--live .case-text {
+    padding-right: 4rem;
+  }
+
+  .case--live > .case-facts,
+  .case--pilot .case-panel {
+    padding-right: 4rem;
+  }
+
+  .case--live .deed {
+    width: calc(100% + 1.5rem);
+    margin-left: -1.5rem;
+  }
+}
+
+.case--pilot {
+  grid-template-areas: 'panel text';
+}
+
+.case--pilot .case-text {
+  grid-area: text;
   justify-content: center;
-  border-radius: 50%;
-  border: 2px solid var(--grey-dark);
-  color: var(--text-light);
-  transition: all 0.3s;
-  flex-shrink: 0;
+  padding: 5rem var(--gutter) 5rem 4rem;
 }
 
-.project-row:hover .project-arrow,
-.project-row.active .project-arrow {
-  border-color: var(--secondary);
-  background: var(--secondary);
+.case--pilot .case-panel {
+  padding: 5rem 5.5rem 5rem var(--gutter);
+  background: var(--yellow-brand);
+}
+
+.case-pinwheel {
+  position: absolute;
+  top: -34px;
+  right: -26px;
+  z-index: 1;
+  width: 68px;
+  fill: var(--ink-strong);
+  transition: rotate 900ms var(--ease-spring);
+}
+
+.case--pilot .case-panel:hover .case-pinwheel {
+  rotate: 90deg;
+}
+
+.case-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.875rem;
+  font-size: 0.9375rem;
+}
+
+.case-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem 0.25rem 0.625rem;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink-strong);
+  font-weight: 600;
+}
+
+.case-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Live: a teal dot with a slow ping, like a running service */
+/* A tinted fill in the status colour, so the pill shows on cream */
+.case-status.is-live {
+  background: var(--tint-teal);
+}
+
+.case-status.is-pilot {
+  background: var(--tint-yellow);
+}
+
+.case-status.is-live .case-status-dot {
+  background: var(--teal-ink);
+  box-shadow: 0 0 0 0 rgba(59, 161, 129, 0.6);
+  animation: case-ping 2.2s var(--ease-out) infinite;
+}
+
+.case-status.is-pilot .case-status-dot {
+  background: var(--yellow-ink);
+}
+
+@keyframes case-ping {
+  70%,
+  100% {
+    box-shadow: 0 0 0 8px rgba(59, 161, 129, 0);
+  }
+}
+
+.case-client {
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.case-title {
+  margin-bottom: 0.25rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.875rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--ink-strong);
+  text-wrap: balance;
+}
+
+.case-copy {
+  max-width: 32rem;
+  font-size: 1.1875rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+/* ---------- Fact tiles (both cases) and the pilot's coming-soon card ---------- */
+.pilot-tiles-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.fact-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.fact-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.125rem 1.25rem 1.25rem;
+  border-radius: 18px;
+  background: var(--cream);
+  color: var(--ink-strong);
+}
+
+.fact-tile.is-wide {
+  grid-column: 1 / -1;
+}
+
+.fact-tile-icon {
+  margin-bottom: 0.75rem;
+}
+
+.fact-tile-value {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.2vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.fact-tile-label {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.fact-tile.is-wide .fact-tile-value {
+  font-size: clamp(1.75rem, 2.8vw, 2.375rem);
+}
+
+.fact-tile.is-wide .fact-tile-label {
+  max-width: 26rem;
+}
+
+/* On cream: a flat warm fill, no outline */
+.case--live .fact-tile {
+  background: var(--panel);
+}
+
+/* Dark card, two-tone like the section titles */
+.pilot-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem 1.5rem 1.625rem;
+  border-radius: 22px;
+  background: var(--ink-strong);
   color: var(--cream);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .project-row {
-    grid-template-columns: 140px 1fr 50px;
-    gap: 2rem;
-    padding: 1.5rem 2rem;
+.pilot-soon-badge {
+  padding: 0.1875rem 0.625rem;
+  border-radius: 999px;
+  background: rgba(248, 204, 69, 0.16);
+  color: var(--yellow-brand);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.pilot-soon-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.3vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.pilot-soon-title span {
+  color: rgba(255, 252, 244, 0.5);
+}
+
+.pilot-soon .btn {
+  margin-top: 0.5rem;
+}
+
+.case--pilot .pilot-soon {
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .case,
+  .case--live,
+  .case--pilot {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
   }
-  
-  .project-stat {
-    font-size: 2rem;
+
+  .case--live {
+    grid-template-areas: 'text' 'panel' 'facts';
   }
-  
-  .project-title {
-    font-size: 1.4rem;
+
+  .case--pilot {
+    grid-template-areas: 'text' 'panel';
+  }
+
+  .case--live .case-text,
+  .case--pilot .case-text {
+    padding: 3rem 1.25rem 2.5rem;
+  }
+
+  .case--live .case-panel,
+  .case--pilot .case-panel {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .case--pilot .case-panel {
+    padding-top: 3.5rem;
+  }
+
+  .case--live .deed {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* Stacked, the live case's facts sat on cream right above the pilot's text,
+     so the two projects read as one. The facts join the grey panel instead:
+     each case is now copy on cream plus one colour block, and the step from
+     grey back to cream starts the next project. */
+  .case--live > .case-facts {
+    padding: 0 1.25rem 3.5rem;
+    background: var(--panel);
+  }
+
+  .case--live .case-panel {
+    padding-bottom: 1.5rem;
+  }
+
+  .case--live .fact-tile {
+    background: var(--cream);
   }
 }
 
-@media (max-width: 768px) {
-  .expertise {
-    padding: 4rem 0;
+@media (max-width: 640px) {
+  .expertise .section-header {
+    margin-bottom: 2rem;
   }
-  
-  .expertise-container {
-    padding: 0 1.25rem;
+
+  .case--live .case-text,
+  .case--pilot .case-text {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
-  
-  .expertise-header {
-    margin-bottom: 3rem;
+
+  /* the section header right above already gives the gap */
+  .case--live .case-text {
+    padding-top: 0;
   }
-  
-  .expertise-title {
-    font-size: clamp(2rem, 8vw, 3rem);
+
+  .case--live .case-panel,
+  .case--pilot .case-panel {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
-  
-  .project-row {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    padding: 1.75rem 1.5rem;
-    position: relative;
+
+  /* room for the pinwheel that hangs over the first tile */
+  .case--pilot .case-panel {
+    padding-top: 3rem;
   }
-  
-  .project-stat-block {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 1.25rem;
+
+  /* the facts continue the grey panel right under the demo */
+  .case--live .case-panel {
+    padding-bottom: 1.25rem;
   }
-  
-  .project-stat {
-    font-size: 1.75rem;
+
+  .case--live > .case-facts {
+    padding-top: 0;
+    padding-bottom: 2rem;
   }
-  
-  .project-label {
-    font-size: 0.8rem;
+
+  .case-pinwheel {
+    top: -28px;
+    right: -10px;
+    width: 56px;
   }
-  
-  .project-title {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
+
+  /* Only the status pill above the title: the client line wrapped under it as
+     a second label row, and the title and lead already say who it is for
+     ("Rzeczoznawcy…", "…placówek medycznych"). The pill shrinks to a tag that
+     belongs to the title instead of a block of its own. */
+  .case-client {
+    display: none;
   }
-  
-  .project-description {
-    font-size: 0.95rem;
-    line-height: 1.6;
+
+  .case-meta {
+    margin-bottom: -0.25rem;
   }
-  
-  .project-arrow {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
+
+  .case-status {
+    gap: 0.375rem;
+    padding: 0.125rem 0.625rem 0.125rem 0.5rem;
+  }
+
+  .case-status-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .case-title {
+    margin-bottom: 0;
+  }
+
+  /* The tiles become one grouped list, like a phone's settings screen: a
+     single card with a row per fact, icon on the left, value over its label.
+     Half-width tiles squeezed each label into a narrow column. */
+  .fact-tiles {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    border-radius: 18px;
+    background: var(--cream);
+  }
+
+  .fact-tile,
+  .case--live .fact-tile {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 0.875rem;
+    row-gap: 0.125rem;
+    padding: 0.875rem 1rem;
+    border-radius: 0;
+    background: none;
+  }
+
+  .fact-tile + .fact-tile {
+    border-top: 1px solid var(--line);
+  }
+
+  .fact-tile-icon {
+    grid-row: 1 / span 2;
+    align-self: start;
+    margin: 0.125rem 0 0;
+  }
+
+  .fact-tile-label,
+  .fact-tile.is-wide .fact-tile-label {
+    max-width: none;
+    text-wrap: pretty;
+  }
+
+  /* The coming-soon card: the button is the card's one action, full width
+     for the thumb like every other primary button on the phone */
+  .pilot-soon {
+    gap: 0.75rem;
+    padding: 1.25rem;
+    border-radius: 18px;
+  }
+
+  .pilot-soon .btn {
+    align-self: stretch;
+    margin-top: 0.25rem;
   }
 }
 
 @media (max-width: 480px) {
-  .expertise {
-    padding: 3rem 0;
-  }
-  
-  .expertise-container {
-    padding: 0 1rem;
-  }
-  
-  .expertise-header {
-    margin-bottom: 2.5rem;
-  }
-  
-  .project-row {
-    padding: 1.5rem 1.25rem;
-    gap: 1rem;
-  }
-  
-  .project-stat {
-    font-size: 1.5rem;
-  }
-  
-  .project-label {
-    font-size: 0.75rem;
-  }
-  
-  .project-title {
-    font-size: 1.2rem;
-  }
-  
-  .project-description {
-    font-size: 0.9rem;
-  }
-  
-  .project-arrow {
-    width: 40px;
-    height: 40px;
-    top: 1.25rem;
-    right: 1.25rem;
+  .case--live .case-text,
+  .case--pilot .case-text,
+  .case--live > .case-facts,
+  .case--live .case-panel,
+  .case--pilot .case-panel {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }

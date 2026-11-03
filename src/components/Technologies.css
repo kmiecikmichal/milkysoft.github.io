@@ -1,141 +1,105 @@
-.technologies {
-  background: var(--cream);
-}
+/* A ruled list in two columns, like the feature list under the hero */
 
-.capabilities-grid {
+.capabilities {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 5rem;
+  list-style: none;
+  border-top: 1px solid var(--line);
 }
 
-.capability-card {
-  position: relative;
-  height: 200px;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 20px;
-  padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  transition: all 0.4s var(--ease);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12),
-              0 2px 8px rgba(207, 108, 88, 0.1),
-              inset 0 1px 0 rgba(255, 255, 255, 0.6),
-              inset 0 -1px 0 rgba(255, 255, 255, 0.2);
-  overflow: hidden;
-  isolation: isolate;
+/* Icon and title sit at the top of the row, so titles in the same row line up
+   across both columns whatever the length of the text under them */
+.capability {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 1.25rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--line);
 }
 
-.capability-card:hover {
-  border-color: rgba(207, 108, 88, 0.6);
-  transform: translateY(-8px);
-  box-shadow: 0 16px 64px rgba(207, 108, 88, 0.25),
-              0 8px 32px rgba(0, 0, 0, 0.15),
-              inset 0 1px 0 rgba(255, 255, 255, 0.7),
-              inset 0 -1px 0 rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(24px) saturate(200%);
-  -webkit-backdrop-filter: blur(24px) saturate(200%);
+.capability-icon {
+  margin-top: 0.0625rem;
+  color: var(--ink-strong);
+  transition: transform var(--dur-slow) var(--ease-spring);
 }
 
-.capability-background {
-  display: none; /* disable gradient overlay */
-}
-
-/* gradient overlay disabled */
-
-.capability-content {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.capability-number {
-  font-family: var(--font-heading);
-  font-size: 3rem;
-  font-weight: 700;
-  color: rgba(207, 108, 88, 0.15);
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  transition: color 0.3s var(--ease);
-}
-
-.capability-card:hover .capability-number {
-  color: var(--secondary);
+.capability:hover .capability-icon {
+  transform: rotate(-10deg) scale(1.12);
 }
 
 .capability-title {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.375rem;
   font-weight: 600;
-  color: var(--text);
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
+  color: var(--ink-strong);
 }
 
 .capability-description {
-  color: var(--text-light);
-  line-height: 1.6;
-}
-
-.capability-arrow {
-  display: none;
-}
-
-.capability-shine {
-  display: none;
+  margin-top: 0.25rem;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
 }
 
 @media (max-width: 768px) {
-  .capabilities-grid {
+  .capabilities {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
   }
-  
-  .capability-card {
-    height: auto;
-    min-height: 180px;
-    padding: 1.75rem;
-  }
-  
-  .capability-number {
-    font-size: 2.5rem;
-    top: 0.75rem;
-    right: 1.25rem;
-  }
-  
-  .capability-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .capability-description {
-    font-size: 0.95rem;
-    line-height: 1.5;
+
+  .capability {
+    padding: 1.375rem 0;
   }
 }
 
-@media (max-width: 480px) {
-  .capability-card {
-    padding: 1.5rem 1.25rem;
-    min-height: 160px;
-    border-radius: 16px;
+/* Phones: an accordion (Technologies.jsx renders <details> below 640px). The
+   six titles read as the summary; the description opens under its title. */
+@media (max-width: 640px) {
+  .capability.is-fold {
+    display: block;
+    padding: 0;
   }
-  
-  .capability-number {
-    font-size: 2rem;
-    top: 0.5rem;
-    right: 1rem;
+
+  .capability.is-fold summary {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    min-height: 44px;
+    padding: 1rem 0;
+    list-style: none;
+    cursor: pointer;
   }
-  
-  .capability-title {
-    font-size: 1.15rem;
+
+  .capability.is-fold summary::-webkit-details-marker {
+    display: none;
   }
-  
-  .capability-description {
-    font-size: 0.9rem;
+
+  .capability-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin-top: 0;
+  }
+
+  .capability.is-fold .capability-title {
+    flex: 1;
+  }
+
+  .capability-fold-icon {
+    flex-shrink: 0;
+    color: var(--ink-strong);
+    transition: transform var(--dur-slow) var(--ease-spring);
+  }
+
+  .capability.is-fold details[open] .capability-fold-icon {
+    transform: rotate(45deg);
+  }
+
+  /* Under the title, not under the icon */
+  .capability.is-fold .capability-description {
+    margin-top: 0;
+    padding: 0 0 1.25rem calc(24px + 0.875rem);
+    text-wrap: pretty;
   }
 }

@@ -1,175 +1,161 @@
 .footer {
-  background: transparent; /* inherit global unified background */
-  padding: 4rem 0 2rem;
+  padding: 5rem 0 2.5rem;
 }
 
 .footer-content {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 3rem;
-  margin-bottom: 3rem;
+  padding-bottom: 4rem;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .footer-logo-image {
-  height: 2.2rem;
+  height: 2.25rem;
   width: auto;
-  object-fit: contain;
-  margin-bottom: 0;
+  align-self: flex-start;
 }
 
 .footer-tagline {
-  color: var(--text-light);
-  font-size: 0.9rem;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink-strong);
 }
 
-.footer-column h4 {
-  color: var(--text);
+.footer-column h2 {
+  margin-bottom: 1.25rem;
+  font-size: 0.9375rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
+  color: var(--ink-soft);
 }
 
 .footer-column ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   list-style: none;
 }
 
-.footer-column li {
-  margin-bottom: 0.75rem;
-}
-
-.footer-column a {
-  color: var(--text-light);
+.footer-column a,
+.privacy-link {
+  color: var(--ink-strong);
+  font-weight: 500;
   text-decoration: none;
-  transition: color 0.3s;
-  cursor: pointer;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1.5px;
+  transition: background-size var(--dur-slow) var(--ease);
 }
 
-.footer-column a:hover {
-  color: var(--secondary);
+/* A larger tap area than the text, without changing the layout. The list gap
+   is 0.75rem, so neighbouring areas do not overlap. */
+.footer-column a,
+.privacy-link {
+  position: relative;
+}
+
+.footer-column a::before,
+.privacy-link::before {
+  content: '';
+  position: absolute;
+  inset: -0.375rem 0;
+}
+
+.footer-column a:hover,
+.privacy-link:hover {
+  background-size: 100% 1.5px;
+}
+
+.footer-nowrap {
+  white-space: nowrap;
 }
 
 .footer-bottom {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
   padding-top: 2rem;
-  border-top: 2px solid var(--grey-dark);
-  color: var(--text-light);
-  font-size: 0.95rem;
-}
-
-.privacy-link {
-  color: var(--text-light);
-  text-decoration: none;
-  margin-left: 0.5rem;
-  transition: color 0.3s;
-}
-
-.privacy-link:hover {
-  color: var(--secondary);
-  text-decoration: underline;
+  border-top: 1px solid var(--line);
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
 }
 
 @media (max-width: 768px) {
   .footer {
-    padding: 1.5rem 0 0.75rem;
+    padding: 3.5rem 0 2rem;
   }
-  
+
   .footer-content {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 1.5rem;
+    padding-bottom: 2.5rem;
   }
-  
-  .footer-brand {
-    display: none; /* hide brand on mobile */
+
+  /* The contact column holds the e-mail address, too wide for half of a
+     320px screen, so it gets the full row */
+  .footer-brand,
+  .footer-column:last-child {
+    grid-column: 1 / -1;
   }
-  
-  .footer-logo-image {
-    height: 1.8rem;
-  }
-  
-  .footer-tagline {
-    font-size: 0.85rem;
-    margin-top: 0.25rem;
-  }
-  
-  .footer-column {
-    text-align: center;
-  }
-  
-  /* Show Services (1st) and Connect (3rd), hide Company (2nd) */
-  .footer-column:nth-of-type(1) {
-    display: block; /* Services - first column */
-  }
-  
-  .footer-column:nth-of-type(2) {
-    display: none; /* Company - hidden */
-  }
-  
-  .footer-column:nth-of-type(3) {
-    display: block; /* Connect - second column */
-  }
-  
-  .footer-column h4 {
-    font-size: 0.9rem;
-    margin-bottom: 0.375rem;
-  }
-  
-  .footer-column ul {
-    padding: 0;
-    margin: 0;
-  }
-  
-  .footer-column li {
-    margin-bottom: 0.25rem;
-  }
-  
-  .footer-column a {
-    font-size: 0.875rem;
-    padding: 0.25rem 0;
-    min-height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
+
   .footer-bottom {
-    padding-top: 0.75rem;
-    font-size: 0.75rem;
+    flex-direction: column;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .footer {
-    padding: 1.25rem 0 0.5rem;
+    padding: 3rem 0 1.5rem;
   }
-  
+
   .footer-content {
-    grid-template-columns: 1fr 1fr;
+    row-gap: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .footer-brand {
     gap: 0.75rem;
-    margin-bottom: 1rem;
   }
-  
-  .footer-logo-image {
-    height: 1.6rem;
+
+  /* All three service links lead to the same section, and the menu already
+     has it, so phones keep two short columns: the page and the contact. The
+     first one takes only the width of its links, so the e-mail address fits
+     beside it even on a 320px screen. */
+  .footer-content {
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: 2.5rem;
   }
-  
-  .footer-column h4 {
-    font-size: 0.85rem;
-    margin-bottom: 0.25rem;
+
+  .footer-brand + .footer-column {
+    display: none;
   }
-  
-  .footer-column li {
-    margin-bottom: 0.2rem;
+
+  .footer-column:last-child {
+    grid-column: auto;
   }
-  
-  .footer-column a {
-    font-size: 0.8rem;
-    padding: 0.2rem 0;
-    min-height: 32px;
+
+  .footer-column h2 {
+    margin-bottom: 0.875rem;
   }
-  
+
+  /* A taller row so each link is a comfortable tap target */
+  .footer-column ul {
+    gap: 1rem;
+  }
+
+  .footer-column a::before {
+    inset: -0.5rem 0;
+  }
+
   .footer-bottom {
-    padding-top: 0.5rem;
-    font-size: 0.7rem;
+    padding-top: 1.5rem;
   }
 }

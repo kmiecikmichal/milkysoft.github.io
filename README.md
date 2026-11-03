@@ -1,120 +1,103 @@
-# MilkySoft
+# Milkysoft
 
-A modern React application built with Vite, featuring a responsive website for MilkySoft with multiple sections including Hero, Services, Expertise, Technologies, and more.
+Landing page for [milkysoft.io](https://milkysoft.io), built with React + Vite and
+served from GitHub Pages.
 
-## 🚀 Technologies
+## Technologies
 
-- **React 18.3.1** - UI library
-- **Vite 7.1.7** - Build tool and dev server
-- **React Router DOM 7.9.5** - Client-side routing
-- **Tailwind CSS 3.4.17** - Utility-first CSS framework
-- **PostCSS** - CSS processing
-- **TypeScript 5.4.5** - Type definitions
+- **React 18** — UI library
+- **Vite 7** — build tool and dev server
+- **React Router 7** — client-side routing
+- **PostCSS + Autoprefixer** — CSS processing
+- **ESLint 9** (flat config) — linting, including `jsx-a11y` accessibility rules
 
-## 📦 Prerequisites
+Styling is plain CSS, one file per component, with design tokens in `src/App.css`.
 
-- Node.js (v14 or higher recommended)
-- npm or yarn
+## Prerequisites
 
-## 🛠️ Installation
+- Node.js 20 or newer
+- npm
 
-1. Clone the repository:
+## Installation
+
 ```bash
-git clone <repository-url>
+git clone https://github.com/kmiecikmichal/milkysoft.github.io.git
 cd milkysoft-react
-```
-
-2. Install dependencies:
-```bash
 npm install
 ```
 
-## 🎯 Available Scripts
+## Scripts
 
-- `npm run dev` - Start the development server (runs on http://localhost:5173 by default)
-- `npm run build` - Build the application for production
-- `npm run preview` - Preview the production build locally
-- `npm run lint` - Run ESLint to check for code issues
-- `npm run deploy` - Build and deploy to GitHub Pages
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Dev server on http://localhost:5173 |
+| `npm run build` | Production build into `dist/`, then `scripts/postbuild.mjs` |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | ESLint over the whole project |
+| `npm run fonts` | Re-download and regenerate the self-hosted webfonts |
+| `npm run deploy` | Manual deploy — normally CI does this, see below |
 
-## 📁 Project Structure
+## Project structure
 
 ```
 milkysoft-react/
+├── .github/workflows/deploy.yml   # CI build + Pages deploy
+├── docs/SECURITY.md               # security posture, DNS records, known gaps
+├── public/
+│   ├── fonts/                     # self-hosted woff2 (generated)
+│   ├── .well-known/security.txt
+│   ├── robots.txt, sitemap.xml, og-image.png, CNAME
+├── scripts/
+│   ├── fetch-fonts.sh             # regenerates public/fonts + src/fonts.css
+│   └── postbuild.mjs              # prerendered routes, 404.html, .nojekyll
 ├── src/
-│   ├── components/
-│   │   ├── CTA.jsx / CTA.css
-│   │   ├── Expertise.jsx / Expertise.css
-│   │   ├── Footer.jsx / Footer.css
-│   │   ├── Hero.jsx / Hero.css
-│   │   ├── Navbar.jsx / Navbar.css
-│   │   ├── PrivacyPolicy.jsx / PrivacyPolicy.css
-│   │   ├── Services.jsx / Services.css
-│   │   └── Technologies.jsx / Technologies.css
-│   ├── App.jsx
-│   ├── App.css
-│   ├── main.jsx
-│   └── index.css
-├── dist/           # Production build output
+│   ├── components/                # <Name>.jsx + <Name>.css pairs
+│   ├── hooks/useDocumentLang.js
+│   ├── fonts.css                  # generated - do not edit by hand
+│   ├── App.jsx, App.css, main.jsx, index.css
 ├── index.html
-├── package.json
-├── vite.config.js
-└── postcss.config.js
+└── vite.config.js
 ```
 
-## 🎨 Components
+`dist/` is build output and is **not** committed.
 
-- **Navbar** - Navigation bar component
-- **Hero** - Hero section with main call-to-action
-- **Services** - Services showcase
-- **Expertise** - Expertise and skills display
-- **Technologies** - Technology stack showcase
-- **CTA** - Call-to-action component
-- **Footer** - Footer with links and information
-- **PrivacyPolicy** - Privacy policy page
+## Fonts are self-hosted
 
-## 🚀 Development
+The page makes no requests to Google. Fonts live in `public/fonts/` and are
+declared in the generated `src/fonts.css`. Sending visitor IPs to Google Fonts
+would contradict the privacy policy's claim that no data leaves the EEA.
 
-Start the development server:
+To change which weights or icons are bundled, edit `scripts/fetch-fonts.sh` and
+run `npm run fonts`. The Material Symbols font is subsetted to only the icons the
+site actually uses (~2 KB rather than ~3 MB).
 
-```bash
-npm run dev
-```
+## Routing on GitHub Pages
 
-The application will be available at `http://localhost:5173`.
+GitHub Pages has no rewrite rules, so a hard navigation only returns HTTP 200 if a
+real file exists at that path. `scripts/postbuild.mjs` therefore writes a
+directory index for every real route, plus a `404.html` fallback that renders the
+in-app 404 page.
 
-## 🏗️ Building for Production
+**When adding a route**, add it in two places: the `<Routes>` list in
+`src/App.jsx` and the `ROUTES` array in `scripts/postbuild.mjs`. Miss the second
+and the page will still work for humans but return 404 to crawlers.
 
-To create a production build:
+## Deployment
 
-```bash
-npm run build
-```
+Pushing to `main` builds and deploys via `.github/workflows/deploy.yml`. The
+workflow lints, fails on high-severity production vulnerabilities, builds, and
+publishes to Pages.
 
-The optimized files will be generated in the `dist/` directory.
+This requires **Settings → Pages → Source: GitHub Actions**.
 
-## 📤 Deployment
+`npm run deploy` still works as a manual fallback, publishing to the `gh-pages`
+branch from your machine.
 
-The project is configured to deploy to GitHub Pages. To deploy:
+## Security
 
-```bash
-npm run deploy
-```
+See [docs/SECURITY.md](docs/SECURITY.md) for the security posture, the DNS records
+that must exist, and the headers GitHub Pages cannot deliver.
 
-This command will:
-1. Build the application for production
-2. Deploy the `dist/` folder to the `gh-pages` branch
+## License
 
-Make sure to configure the `base` path in `vite.config.js` if your repository is not at the root of your GitHub Pages site.
-
-## 📝 License
-
-This project is private and proprietary.
-
-## 👨‍💻 Development Notes
-
-- The project uses React Router for client-side routing
-- Styles are organized with component-specific CSS files
-- Tailwind CSS is configured via PostCSS
-- The application is optimized for modern browsers
-
+Private and proprietary.
