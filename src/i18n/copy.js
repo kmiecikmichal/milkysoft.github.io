@@ -4,7 +4,7 @@
 
 const pl = {
   meta: {
-    title: 'Milkysoft — AI na Twoich serwerach',
+    title: 'Milkysoft - AI na Twoich serwerach',
     langLabel: 'Język',
     langName: 'Polski'
   },
