@@ -21,7 +21,7 @@ Cream + terracotta is close to a common AI-generated look, so distinctiveness ha
 - No numbered markers (01/02/03) unless the content is a real sequence.
 - No scattered fade-up-on-scroll for every section; motion only where it means something.
 - No unverifiable stats. Numbers need context (what, for whom, measured how).
-- Real copy only: specific, plain, active voice, no filler.
+- Real copy only: specific, plain, active voice, no filler. No em dashes (—) in anything a visitor reads, titles and meta included; they read as AI-written. Use a hyphen, a colon or a new sentence.
 - Quality floor: responsive to 320px, visible keyboard focus, `prefers-reduced-motion` respected.
 
 ## Verifying UI changes
