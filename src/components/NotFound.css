@@ -38,6 +38,7 @@
 }
 
 .notfound-link {
+  position: relative;
   display: inline-block;
   padding: 0.9rem 2rem;
   border-radius: 50px;
@@ -51,4 +52,12 @@
 .notfound-link:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(207, 108, 88, 0.3);
+}
+
+/* Covers the spot the link lifted from, so a cursor on its edge doesn't flicker */
+.notfound-link:hover::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 -2px;
+  z-index: -1;
 }

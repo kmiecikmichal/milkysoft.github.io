@@ -1,0 +1,48 @@
+import {
+  BookOpenText,
+  Brain,
+  ChatsCircle,
+  Clock,
+  Cloud,
+  Cpu,
+  FileMagnifyingGlass,
+  Files,
+  GitBranch,
+  Graph,
+  HardDrives,
+  ListChecks,
+  LockKey,
+  PlugsConnected,
+  Robot,
+  ShieldCheck,
+  Timer,
+  Translate,
+  UsersThree,
+  WifiSlash,
+  Wrench
+} from '@phosphor-icons/react'
+
+// Copy refers to icons by name; this is the only place they are resolved.
+export const ICONS = {
+  BookOpenText,
+  Brain,
+  ChatsCircle,
+  Clock,
+  Cloud,
+  Cpu,
+  FileMagnifyingGlass,
+  Files,
+  GitBranch,
+  Graph,
+  HardDrives,
+  ListChecks,
+  LockKey,
+  PlugsConnected,
+  Robot,
+  ShieldCheck,
+  Timer,
+  Translate,
+  UsersThree,
+  WifiSlash,
+  Wrench
+}

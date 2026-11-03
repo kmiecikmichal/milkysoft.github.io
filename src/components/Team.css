@@ -1,0 +1,100 @@
+/* Three people as typography only: a thick brand-colour rule, a big first name,
+   role and a short description. Photos come later, with the team's own graphics. */
+
+.people {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3rem;
+  list-style: none;
+}
+
+.person {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: calc(8px + 1.75rem);
+}
+
+/* The colour rule: draws in from the left when the row scrolls into view, one
+   person after another, and thickens under the pointer */
+.person::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: var(--bar, var(--ink-strong));
+  transform-origin: left;
+  transition: height var(--dur-slow) var(--ease-spring);
+}
+
+.person:hover::before {
+  height: 14px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .can-reveal .person.draw-in:not(.is-in)::before {
+    transform: scaleX(0);
+  }
+
+  .can-reveal .person.draw-in.is-in::before {
+    animation: bar-draw 900ms var(--ease-enter) backwards;
+    animation-delay: calc(var(--i, 0) * 140ms);
+  }
+}
+
+@keyframes bar-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.tone-bar-yellow {
+  --bar: var(--yellow-brand);
+}
+
+.tone-bar-teal {
+  --bar: var(--teal);
+}
+
+.tone-bar-terracotta {
+  --bar: var(--terracotta);
+}
+
+.person-name {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  color: var(--ink-strong);
+}
+
+.person-role {
+  font-weight: 600;
+  color: var(--ink-strong);
+}
+
+.person-description {
+  color: var(--ink-soft);
+}
+
+@media (max-width: 900px) {
+  .people {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .people {
+    gap: 2rem;
+  }
+
+  .person {
+    gap: 0.375rem;
+    padding-top: calc(8px + 1.25rem);
+  }
+}

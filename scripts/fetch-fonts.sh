@@ -18,9 +18,8 @@ fetch() {
 
 echo "Fetching CSS..." >&2
 fetch "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-fetch "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-fetch "https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap"
-fetch "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=code,design_services,dns,psychology,smart_toy,trending_up"
+# Inter Tight: the display cut for headlines
+fetch "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&display=swap"
 
 python3 - "$CSS_OUT.raw" "$CSS_OUT" "$OUT_DIR" <<'PY'
 import re, sys, subprocess, hashlib, os

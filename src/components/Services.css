@@ -1,193 +1,175 @@
-.services {
-  background: var(--cream);
-  position: relative;
-}
-
-/* unified background: services overlay removed */
-
-.services .container {
-  position: relative;
-  z-index: 1;
-}
-
+/* Three services in a ruled grid: hairlines between cells, no card chrome.
+   Each card is a subgrid over four shared rows (icon, title, text, list), so
+   titles, text and lists start on the same line in every column. */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(4, auto);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
 }
 
-.service-card {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  padding: 2.5rem;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  transition: all 0.4s var(--ease);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12),
-              0 2px 8px rgba(207, 108, 88, 0.1),
-              inset 0 1px 0 rgba(255, 255, 255, 0.6),
-              inset 0 -1px 0 rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.service-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(207, 108, 88, 0.4), 
-    transparent
-  );
-  opacity: 0;
-  transition: opacity 0.4s var(--ease);
-}
-
-.service-card:hover::before {
-  opacity: 1;
-}
-
-.service-card:hover {
-  border-color: rgba(207, 108, 88, 0.6);
-  transform: translateY(-10px);
-  box-shadow: 0 16px 64px rgba(207, 108, 88, 0.25),
-              0 8px 32px rgba(0, 0, 0, 0.15),
-              inset 0 1px 0 rgba(255, 255, 255, 0.7),
-              inset 0 -1px 0 rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(24px) saturate(200%);
-  -webkit-backdrop-filter: blur(24px) saturate(200%);
-}
-
-.service-card > * {
-  position: relative;
-  z-index: 1;
+.service {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  align-content: start;
+  row-gap: 1rem;
+  padding: 2.5rem 2.25rem 2.75rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .service-icon {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1rem;
-  opacity: 0.9;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  align-self: flex-start;
-  margin-top: -6px; /* nudge upwards */
-  margin-left: -4px; /* nudge left for better alignment with title */
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 0.75rem;
+  border-radius: 50%;
+  color: var(--ink-strong);
 }
 
-.service-icon .material-symbols-rounded {
-  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 48;
-  font-size: 42px;
-  line-height: 1;
-  color: var(--secondary);
+/* Same filled brand circles as the icons in the hero statement */
+.service-icon.tone-yellow {
+  background: var(--yellow-brand);
+}
+
+.service-icon.tone-blue {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.service-icon.tone-teal {
+  background: var(--teal);
+  color: var(--white);
 }
 
 .service-title {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: 1.625rem;
   font-weight: 600;
-  color: var(--text);
-  margin-bottom: 1rem;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--ink-strong);
 }
 
 .service-description {
-  color: var(--text-light);
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
+  color: var(--ink-soft);
 }
 
 .service-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
   list-style: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ink-strong);
 }
 
+/* The tick sits on the first line when an item wraps */
 .service-features li {
-  color: var(--text);
-  padding: 0.5rem 0;
-  padding-left: 1.5rem;
-  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  line-height: 1.5;
 }
 
-.service-features li::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--secondary);
-  font-weight: 700;
+.service-features svg {
+  flex-shrink: 0;
+  margin-top: 0.22em;
+  color: var(--teal-ink);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .services-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    grid-template-rows: none;
   }
-  
-  .service-card {
-    padding: 2rem 1.75rem;
-  }
-  
-  .service-icon {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 0.875rem;
-  }
-  
-  .service-icon .material-symbols-rounded {
-    font-size: 36px;
-  }
-  
-  .service-title {
-    font-size: 1.3rem;
-  }
-  
-  .service-description {
-    font-size: 0.95rem;
-    margin-bottom: 1.25rem;
-  }
-  
-  .service-features li {
-    font-size: 0.9rem;
-    padding: 0.4rem 0;
-    padding-left: 1.75rem; /* ensure enough space for arrow */
-  }
-  
-  .service-features li::before {
-    left: 0.25rem; /* adjust arrow position slightly */
+
+  .service {
+    grid-row: auto;
+    grid-template-rows: none;
   }
 }
 
-@media (max-width: 480px) {
-  .service-card {
-    padding: 1.5rem 1.25rem;
-    border-radius: 16px;
+/* Phones: an accordion (Services.jsx renders <details> below 640px). A ruled
+   list like the FAQ: the icon, title and a plus on each row, one row open. */
+@media (max-width: 640px) {
+  .services-grid {
+    border-left: 0;
   }
-  
+
+  .service-fold {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .service-fold summary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 44px;
+    padding: 1rem 0;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .service-fold summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .service-fold .service-title {
+    flex: 1;
+  }
+
+  .service-fold-icon {
+    flex-shrink: 0;
+    color: var(--ink-strong);
+    transition: transform var(--dur-slow) var(--ease-spring);
+  }
+
+  .service-fold[open] .service-fold-icon {
+    transform: rotate(45deg);
+  }
+
+  .service-fold-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 0.25rem 0 1.5rem;
+  }
+
+  /* An icon chip a little taller than the title, not a badge that outweighs it */
   .service-icon {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
+    margin-bottom: 0;
   }
-  
-  .service-icon .material-symbols-rounded {
-    font-size: 32px;
+
+  .service-icon svg {
+    width: 18px;
+    height: 18px;
   }
-  
-  .service-title {
-    font-size: 1.2rem;
-    margin-bottom: 0.75rem;
+
+  .service-description {
+    text-wrap: pretty;
   }
-  
+
+  /* The points read as a quiet spec list under a hairline: regular weight, so
+     they do not shout over the description above */
+  .service-features {
+    gap: 0.375rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--line);
+    font-weight: 400;
+    color: var(--ink);
+  }
+
   .service-features li {
-    padding-left: 1.75rem; /* ensure enough space for arrow on small screens */
-  }
-  
-  .service-features li::before {
-    left: 0.25rem; /* adjust arrow position slightly */
+    gap: 0.5rem;
+    line-height: 1.45;
+    text-wrap: pretty;
   }
 }

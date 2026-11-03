@@ -1,41 +1,41 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useLang, homePath, privacyPath } from '../i18n/lang'
 import './Footer.css'
 import logo from '../assets/Milkysoft_logo_new.svg'
 
-const SERVICE_LINKS = [
-  { id: 'services', label: 'AI Consulting' },
-  { id: 'services', label: 'Agentic Systems' },
-  { id: 'services', label: 'Custom Development' }
-]
+const COMPANY_IDS = ['expertise', 'technologies', 'process', 'team', 'contact']
 
-const COMPANY_LINKS = [
-  { id: 'expertise', label: 'Expertise' },
-  { id: 'technologies', label: 'Technologies' },
-  { id: 'contact', label: 'Contact' }
-]
+// Keep hyphenated words such as "on-premise" whole; browsers break lines at the hyphen
+const keepHyphenated = (label) =>
+  label.split(/(\S+-\S+)/).map((part, i) =>
+    i % 2 ? (
+      <span key={i} className="footer-nowrap">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  )
 
 const Footer = () => {
   const { pathname } = useLocation()
+  const { lang, t } = useLang()
+  const copy = t.footer
   // The footer also renders on /privacy-policy and the 404 page, where these
   // sections do not exist - there the links have to go back to the home page.
-  const isHome = pathname === '/'
+  const home = homePath(lang)
+  const isHome = pathname === home
 
   const handleSectionClick = (e, id) => {
     if (!isHome) return
     const element = document.getElementById(id)
     if (!element) return
     e.preventDefault()
-    window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' })
+    element.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const sectionLinks = (links) =>
-    links.map(({ id, label }) => (
-      <li key={label}>
-        <a href={isHome ? `#${id}` : `/#${id}`} onClick={(e) => handleSectionClick(e, id)}>
-          {label}
-        </a>
-      </li>
-    ))
+  const href = (id) => (isHome ? `#${id}` : `${home === '/' ? '' : home}/#${id}`)
+  const companyLabel = (id) => (id === 'contact' ? copy.contact : t.nav.items[id])
 
   return (
     <footer className="footer">
@@ -43,37 +43,45 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-brand">
             <img src={logo} alt="Milkysoft" className="footer-logo-image" />
-            <p className="footer-tagline">We code, you profit</p>
+            <p className="footer-tagline">{copy.tagline}</p>
           </div>
 
           <div className="footer-column">
-            <h4>Services</h4>
-            <ul>{sectionLinks(SERVICE_LINKS)}</ul>
+            <h2>{copy.services}</h2>
+            <ul>
+              {copy.serviceLinks.map((label) => (
+                <li key={label}>
+                  <a href={href('services')} onClick={(e) => handleSectionClick(e, 'services')}>
+                    {keepHyphenated(label)}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="footer-column">
-            <h4>Company</h4>
-            <ul>{sectionLinks(COMPANY_LINKS)}</ul>
+            <h2>{copy.company}</h2>
+            <ul>
+              {COMPANY_IDS.map((id) => (
+                <li key={id}>
+                  <a href={href(id)} onClick={(e) => handleSectionClick(e, id)}>
+                    {companyLabel(id)}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="footer-column">
-            <h4>Connect</h4>
+            <h2>{copy.connect}</h2>
             <ul>
               <li>
-                <a
-                  href="https://www.linkedin.com/company/milkysoft"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="https://www.linkedin.com/company/milkysoft" target="_blank" rel="noopener noreferrer">
                   LinkedIn
                 </a>
               </li>
               <li>
-                <a
-                  href="https://www.instagram.com/milkysoft_io"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="https://www.instagram.com/milkysoft_io" target="_blank" rel="noopener noreferrer">
                   Instagram
                 </a>
               </li>
@@ -86,11 +94,11 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p>
-            &copy; {new Date().getFullYear()} Milkysoft. All rights reserved.{' '}
-            <Link to="/privacy-policy" className="privacy-link">
-              Privacy Policy
-            </Link>
+            &copy; {new Date().getFullYear()} Milkysoft. {copy.rights}
           </p>
+          <Link to={privacyPath(lang)} className="privacy-link">
+            {copy.privacy}
+          </Link>
         </div>
       </div>
     </footer>

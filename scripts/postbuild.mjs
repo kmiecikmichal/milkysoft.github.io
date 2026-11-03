@@ -18,13 +18,29 @@ const SITE = 'https://milkysoft.io'
 // the <Route> list in src/App.jsx.
 const ROUTES = [
   {
+    path: 'en',
+    lang: 'en',
+    title: 'Milkysoft — AI on your own servers',
+    description:
+      'We deploy language models on company servers: knowledge bases with chat and custom AI applications. Your data never leaves your network.'
+  },
+  {
     path: 'privacy-policy',
     lang: 'pl',
     title: 'Polityka Prywatności — Milkysoft',
     description:
       'Polityka prywatności Milkysoft Sp. z o.o. - zasady przetwarzania danych osobowych zgodnie z RODO, cele, podstawy prawne, okresy przechowywania i prawa osób, których dane dotyczą.'
+  },
+  {
+    path: 'en/privacy-policy',
+    lang: 'en',
+    title: 'Privacy Policy — Milkysoft',
+    description:
+      'Privacy policy of Milkysoft Sp. z o.o.: how we process personal data under the GDPR, for what purposes and on what legal bases, how long we keep it and your rights.'
   }
 ]
+
+const LOCALE = { pl: 'pl_PL', en: 'en_US' }
 
 const shell = readFileSync(join(dist, 'index.html'), 'utf8')
 
@@ -49,6 +65,12 @@ for (const route of ROUTES) {
   html = replaceMeta(html, /(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
   html = replaceMeta(html, /(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
   html = replaceMeta(html, /(<meta property="og:title" content=")[^"]*(")/, `$1${route.title}$2`)
+  html = replaceMeta(html, /(<meta name="twitter:title" content=")[^"]*(")/, `$1${route.title}$2`)
+  html = replaceMeta(
+    html,
+    /(<meta property="og:locale" content=")[^"]*(" \/>\s*<meta property="og:locale:alternate" content=")[^"]*(")/,
+    `$1${LOCALE[route.lang]}$2${LOCALE[route.lang === 'pl' ? 'en' : 'pl']}$3`
+  )
 
   const dir = join(dist, route.path)
   mkdirSync(dir, { recursive: true })

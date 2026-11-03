@@ -1,290 +1,966 @@
+/* Hero: a split page. Copy on cream at the left, a warm grey panel at the right
+   with the photo, a dashboard card and a few geometric marks. The panel runs down
+   into the statement row below, as in the reference layout. */
 .hero {
-  position: relative;
-  min-height: 100vh;
-  overflow: visible; /* allow sticky children to work */
-  background: var(--cream);
-  padding-top: 0; /* start carousel at very top */
+  padding-top: var(--nav-height);
 }
 
-/* Scroll-driven carousel container */
-.hero-scroll-space {
-  height: 400vh; /* 4 phrases → 4 viewport heights */
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(440px, 0.74fr);
+  grid-template-areas:
+    'main visual'
+    'statement promises';
 }
 
-.hero-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+/* ---------- Copy ---------- */
+.hero-main {
+  grid-area: main;
   display: flex;
-  align-items: center;
-}
-
-/* unified background: hero gradient removed */
-
-/* unified background: hero orbs removed */
-
-.hero .container {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-content {
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  min-height: max(640px, calc(100svh - var(--nav-height) - 40px));
+  padding: 4.5rem 3rem 4.5rem var(--gutter);
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.5rem;
-  background: rgba(207, 108, 88, 0.15);
-  border: 2px solid var(--secondary);
-  border-radius: 50px;
-  color: var(--text);
-  font-size: 0.9rem;
+  gap: 0.875rem;
+  font-size: 1.1875rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-  animation: badgePulse 3s ease-in-out infinite;
+  letter-spacing: -0.01em;
+  color: var(--ink-strong);
+  animation: fade-up 700ms var(--ease-out) 80ms backwards;
 }
 
-@keyframes badgePulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(207, 108, 88, 0.4); }
-  50% { transform: scale(1.05); box-shadow: 0 0 20px 5px rgba(207, 108, 88, 0.2); }
-}
-
-.badge-dot {
-  width: 8px;
-  height: 8px;
+.hero-badge-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  background: var(--primary);
-  animation: dotPulse 2s ease-in-out infinite;
-}
-
-@keyframes dotPulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.5); opacity: 0.7; }
+  background: var(--panel);
+  color: var(--ink-strong);
 }
 
 .hero-title {
+  margin-top: 2.25rem;
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 8vw, 6.5rem);
+  font-weight: 700;
+  font-size: clamp(3.25rem, 7.3vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  color: var(--ink-strong);
+}
+
+/* Each line rises out of its own mask. Only the bottom edge clips, so the file
+   dots can hop above the line without being cut off. */
+.hero-line {
+  display: block;
+  clip-path: inset(-1em -1em 0 -1em);
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.hero-line-inner {
+  display: inline-flex;
+  align-items: center;
+  animation: line-up 1000ms var(--ease) backwards;
+  animation-delay: calc(150ms + var(--i) * 120ms);
+}
+
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+/* Company files set into the headline, as three dots. While the knowledge base
+   in the card is searching and writing, they wave like an LLM's typing indicator. */
+.hero-files {
+  display: inline-flex;
+  margin-left: 0.2em;
+}
+
+.hero-file-slot {
+  display: block;
+  margin-left: -0.16em;
+  transition: margin var(--dur-slow) var(--ease-spring);
+}
+
+.hero-file-slot:first-child {
+  margin-left: 0;
+}
+
+.hero-files:hover .hero-file-slot:not(:first-child) {
+  margin-left: -0.02em;
+}
+
+.hero-files.is-thinking .hero-file-slot {
+  transform-origin: 50% 100%;
+  /* Two hops per wave: about as long as the card takes to search and answer */
+  animation: typing-dot 0.9s 2;
+  animation-delay: calc(var(--a) * 120ms);
+}
+
+/* A chat typing indicator: a quick hop that slows at the top and falls back
+   like it has weight, a small squash on landing, then a rest */
+@keyframes typing-dot {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  22% {
+    transform: translateY(-22%);
+    animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  }
+  42% {
+    transform: translateY(0) scale(1.05, 0.92);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  56%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero-file {
+  display: grid;
+  place-items: center;
+  width: 0.8em;
+  height: 0.8em;
+  border: 0.045em solid var(--cream);
+  border-radius: 50%;
+  color: var(--white);
+  animation: avatar-pop 700ms var(--ease-spring) backwards;
+  animation-delay: calc(800ms + var(--a) * 110ms);
+}
+
+.hero-file svg {
+  width: 0.42em;
+  height: 0.42em;
+}
+
+.hero-file.tone-terracotta { background-color: var(--terracotta); }
+.hero-file.tone-blue { background-color: var(--blue); }
+.hero-file.tone-teal { background-color: var(--teal); }
+
+@keyframes avatar-pop {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2.5rem;
+  margin-top: 3.25rem;
+  animation: fade-up 700ms var(--ease-out) 650ms backwards;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* ---------- Visual panel ---------- */
+.hero-visual {
+  grid-area: visual;
+  position: relative;
+  background: var(--panel);
+  --px: 0;
+  --py: 0;
+}
+
+.hero-visual-inner {
+  position: absolute;
+  inset: 0;
+}
+
+/* Depth: each layer drifts against the pointer by a different amount */
+.layer-1,
+.layer-2,
+.layer-3,
+.layer-4 {
+  transition: translate 700ms var(--ease-out);
+}
+
+.layer-1 { translate: calc(var(--px) * -8px) calc(var(--py) * -8px); }
+.layer-2 { translate: calc(var(--px) * -14px) calc(var(--py) * -14px); }
+.layer-3 { translate: calc(var(--px) * -26px) calc(var(--py) * -26px); }
+.layer-4 { translate: calc(var(--px) * -34px) calc(var(--py) * -34px); }
+
+.hero-arch {
+  position: absolute;
+  left: 27%;
+  top: 11%;
+  width: 46%;
+  aspect-ratio: 0.68;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--tint-yellow);
+  animation: arch-in 1200ms var(--ease) 200ms backwards;
+}
+
+.hero-arch img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: photo-settle 1600ms var(--ease) 200ms backwards;
+}
+
+/* The photo drifts inside its arch as the page scrolls */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .hero-arch img {
+      animation:
+        photo-settle 1600ms var(--ease) 200ms backwards,
+        photo-drift linear both;
+      animation-timeline: auto, scroll();
+      animation-range: normal, 0 100vh;
+    }
+  }
+}
+
+/* translate and scale only, so the drift runs on the compositor and scrolling
+   never has to repaint the photo */
+@keyframes photo-drift {
+  to {
+    translate: 0 5%;
+    scale: 1.12;
+  }
+}
+
+@keyframes arch-in {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes photo-settle {
+  from {
+    transform: scale(1.25);
+  }
+}
+
+.hero-pinwheel {
+  position: absolute;
+  left: 17%;
+  top: 7%;
+  z-index: 2;
+  width: 15%;
+  fill: var(--ink-strong);
+  transition:
+    translate 700ms var(--ease-out),
+    rotate 900ms var(--ease-spring);
+  animation: pinwheel-in 1100ms var(--ease-spring) 500ms backwards;
+}
+
+.hero-visual:hover .hero-pinwheel {
+  rotate: 90deg;
+}
+
+@keyframes pinwheel-in {
+  from {
+    transform: rotate(-180deg) scale(0);
+  }
+}
+
+.hero-grid-pattern {
+  position: absolute;
+  right: 9%;
+  bottom: 9%;
+  width: 34%;
+  aspect-ratio: 1;
+  border-right: 1px solid rgba(49, 48, 48, 0.28);
+  border-bottom: 1px solid rgba(49, 48, 48, 0.28);
+  background-image:
+    linear-gradient(to right, rgba(49, 48, 48, 0.28) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(49, 48, 48, 0.28) 1px, transparent 1px);
+  background-size: 12.5% 12.5%;
+  animation: fade-in 1000ms var(--ease-out) 700ms backwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.hero-starburst {
+  position: absolute;
+  right: 6.5%;
+  bottom: 24%;
+  z-index: 2;
+  width: 7%;
+  fill: var(--ink-strong);
+  animation:
+    pinwheel-in 900ms var(--ease-spring) 900ms backwards,
+    spin 28s linear 1.8s infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hero-vertical {
+  position: absolute;
+  right: 4%;
+  top: 9%;
+  writing-mode: vertical-rl;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 4vw, 4.25rem);
   font-weight: 700;
   line-height: 1;
-  margin-bottom: 1.5rem;
-  color: var(--text);
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  gap: 0.3rem;
+  letter-spacing: -0.045em;
+  color: var(--ink-strong);
   white-space: nowrap;
+  animation: vertical-in 1000ms var(--ease) 550ms backwards;
 }
 
-.title-word {
-  display: inline-block;
-  margin: 0 0.3rem;
+@keyframes vertical-in {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
-.title-fixed {
-  display: inline-block;
+/* The knowledge base demo card: it overlaps the edge of the panel */
+.hero-card {
+  position: absolute;
+  left: -12%;
+  top: 47%;
+  z-index: 3;
+  width: clamp(300px, 25vw, 360px);
+  animation: card-in 900ms var(--ease-out) 700ms backwards;
 }
 
-.carousel-word {
+/* From about 1500px the headline is at full size while the card still reaches
+   12% back over the copy column, so the file dots after "zostaje" (the longest
+   Polish line) ran under it when they spread on hover. Overlap less here. */
+@media (min-width: 1500px) {
+  .hero-card {
+    left: -5%;
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+}
+
+.kb-card {
+  padding: 1.25rem 1.25rem 0.875rem;
+  background: var(--ink-strong);
+  border-radius: 20px;
+  color: var(--cream);
+  box-shadow: 0 30px 60px -30px rgba(31, 30, 30, 0.45);
+}
+
+.kb-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.kb-title {
+  white-space: nowrap;
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.kb-scope {
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 252, 244, 0.12);
+  color: rgba(255, 252, 244, 0.8);
+  animation: fade-in 400ms var(--ease-out);
+}
+
+.kb-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-left: auto;
+  color: rgba(255, 252, 244, 0.8);
+  font-weight: 600;
+}
+
+.kb-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 0 rgba(59, 161, 129, 0.6);
+  animation: dot-ping 2.2s var(--ease-out) infinite;
+}
+
+@keyframes dot-ping {
+  70%,
+  100% {
+    box-shadow: 0 0 0 8px rgba(59, 161, 129, 0);
+  }
+}
+
+.kb-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 11.5rem;
+  margin-top: 1rem;
+}
+
+/* The sizing copies only work on narrow screens (see below); on desktop the
+   live answer lays out straight in .kb-body as before */
+.kb-ghost {
+  display: none;
+}
+
+.kb-live {
+  display: contents;
+}
+
+.kb-question {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 12px;
+  background: rgba(255, 252, 244, 0.08);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.kb-question svg {
+  flex-shrink: 0;
+  margin-top: 0.15em;
+  color: var(--yellow-brand);
+}
+
+.kb-caret {
   display: inline-block;
-  margin: 0;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: var(--yellow-brand);
+  animation: caret 900ms steps(1) infinite;
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.kb-searching {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(255, 252, 244, 0.7);
+}
+
+.kb-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.kb-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--yellow-brand);
+  animation: search-dot 900ms var(--ease-out) infinite;
+}
+
+.kb-dots span:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.kb-dots span:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+@keyframes search-dot {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+.kb-answer {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.kb-word {
+  animation: word-in 260ms var(--ease-out);
+}
+
+@keyframes word-in {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+.kb-source {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.625rem 0.375rem 0.5rem;
+  border-radius: 10px;
+  background: var(--cream);
+  color: var(--ink-strong);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  animation: source-pop 520ms var(--ease-spring);
+}
+
+.kb-source svg {
+  color: var(--terracotta);
+}
+
+.kb-source-page {
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+@keyframes source-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.9);
+  }
+}
+
+.kb-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 252, 244, 0.14);
+  font-size: 0.8125rem;
+  color: rgba(255, 252, 244, 0.7);
+}
+
+.kb-zero {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
   font-weight: 700;
-  color: inherit; /* color controlled inline per word */
-  animation: carouselSwap 400ms var(--ease);
-  will-change: transform, opacity, filter;
+  color: var(--yellow-brand);
 }
 
-.carousel-slot {
-  display: inline-block;
-  width: 4.4ch; /* fixed placeholder width to avoid layout shift */
-  text-align: center;
-  overflow: hidden; /* clip animation */
-  height: 1em; /* keep vertical bounds tight */
-  line-height: 1em;
+.kb-sample {
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
+  color: rgba(255, 252, 244, 0.6);
 }
 
-@keyframes carouselSwap {
-  0% { opacity: 0; transform: translateY(30%); filter: blur(4px); }
-  60% { opacity: 1; transform: translateY(-6%); filter: blur(0px); }
-  100% { opacity: 1; transform: translateY(0); }
+/* ---------- Statement row ---------- */
+.hero-statement {
+  grid-area: statement;
+  max-width: 19em;
+  padding: 6rem 3rem 7rem var(--gutter);
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 2.7vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+  color: var(--ink-strong);
+  box-sizing: content-box;
 }
 
-@media (max-width: 768px) {
-  .hero-scroll-space {
-    height: 300vh; /* reduced scroll space for mobile */
+.hero-statement-text {
+  display: block;
+}
+
+.statement-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 0.25em;
+  vertical-align: middle;
+  border-radius: 50%;
+  transition: transform var(--dur-slow) var(--ease-spring);
+}
+
+.statement-icon:hover {
+  transform: rotate(-12deg) scale(1.12);
+}
+
+.statement-icon.tone-yellow {
+  background: var(--yellow-brand);
+  color: var(--ink-strong);
+}
+
+.statement-icon.tone-ink {
+  background: var(--ink-strong);
+  color: var(--cream);
+}
+
+.statement-icon.tone-teal {
+  background: var(--teal);
+  color: var(--white);
+}
+
+.hero-promises {
+  grid-area: promises;
+  align-self: stretch;
+  padding: 5rem var(--gutter) 6rem 3rem;
+  background: var(--panel);
+  list-style: none;
+}
+
+.hero-promises li {
+  border-bottom: 1px solid rgba(49, 48, 48, 0.16);
+}
+
+.hero-promises a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: 76px;
+  color: var(--ink-strong);
+  font-size: 1.1875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.promise-icon {
+  transition: transform var(--dur-slow) var(--ease-spring);
+}
+
+.promise-caret {
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+.hero-promises a:hover .promise-caret {
+  transform: translateX(6px);
+}
+
+.hero-promises a:hover .promise-icon {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+/* ---------- Narrower screens ---------- */
+@media (max-width: 1100px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.8fr);
   }
-  
-  .hero-content {
-    padding: 0 0.5rem;
+
+  .hero-card {
+    left: -18%;
   }
-  
+
+  /* The card is at its narrowest here; the scope chip would push the title
+     onto two lines */
+  .kb-scope {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'main'
+      'visual'
+      'statement'
+      'promises';
+  }
+
+  .hero-main {
+    min-height: 0;
+    padding: 3rem 1.25rem 3.5rem;
+  }
+
+  .hero-badge {
+    font-size: 1rem;
+  }
+
+  .hero-badge-icon {
+    width: 40px;
+    height: 40px;
+  }
+
   .hero-title {
-    gap: 0.2rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    margin-top: 1.75rem;
+    font-size: clamp(3rem, 14.5vw, 5rem);
   }
-  
-  .carousel-slot {
-    width: 4.5ch; /* tightened for mobile */
+
+  .hero-actions {
+    margin-top: 2.5rem;
   }
-  
-  .hero-subtitle {
-    font-size: clamp(1rem, 4vw, 1.2rem);
-    margin-bottom: 2.5rem;
-    padding: 0;
+
+  .hero-visual {
+    aspect-ratio: 1 / 1.45;
   }
-  
-  .hero .cta-btn-primary,
-  .hero .cta-btn-secondary {
-    padding: 1rem 2.5rem;
-    font-size: 0.95rem;
-    min-height: 48px; /* better touch target */
+
+  .hero-card {
+    left: 4%;
+    top: auto;
+    bottom: 5%;
+    width: min(78%, 330px);
+  }
+
+  /* The card is pinned to the bottom of the panel, so any change in its
+     height moved its top edge over the photo. The live answer and hidden
+     copies of all answers share one grid cell: the cell is as tall as the
+     longest answer, whatever is typed at the moment. */
+  .kb-body {
+    display: grid;
+    min-height: 0;
+  }
+
+  .kb-ghost,
+  .kb-live {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+    min-width: 0;
+  }
+
+  .kb-ghost {
+    visibility: hidden;
+  }
+
+  .kb-ghost * {
+    animation: none;
+  }
+
+  .hero-arch {
+    left: 30%;
+    top: 7%;
+    width: 50%;
+  }
+
+  .hero-vertical {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .hero-statement {
+    max-width: none;
+    padding: 3.5rem 1.25rem 3rem;
+  }
+
+  .hero-promises {
+    padding: 1.5rem 1.25rem 3rem;
+  }
+}
+
+/* Phones: tighter rows under the headline, so the hero is not two screens of
+   photo and statement before the content starts */
+@media (max-width: 640px) {
+  .hero-main {
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .hero-badge {
+    gap: 0.625rem;
+    font-size: 0.875rem;
+  }
+
+  .hero-badge-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hero-badge-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hero-title {
+    margin-top: 1.25rem;
+  }
+
+  /* The statement, rendered here on phones (Hero.jsx) as the lead under the
+     headline, so the first screen says what we do before the photo */
+  .hero-lead {
+    margin-top: 1.25rem;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+    animation: fade-up 700ms var(--ease-out) 500ms backwards;
+  }
+
+  .hero-actions {
+    margin-top: 1.75rem;
+  }
+
+  /* The list runs straight into the document strip below, which shares the
+     panel colour on phones; the last rule divides the two */
+  .hero-promises {
+    padding-top: 0.5rem;
+    padding-bottom: 0;
+  }
+
+  /* All three rows lead to the same place, so carets made the list read as
+     a settings menu. The row stays a link. */
+  .hero-promises a {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.875rem;
+    min-height: 56px;
+    padding-block: 0.5rem;
+    line-height: 1.35;
+    text-wrap: pretty;
+  }
+
+  .promise-caret {
+    display: none;
+  }
+
+  /* The demo card at phone scale: it reads as a small app screen beside the
+     photo, not as a second block of body text */
+  .kb-card {
+    padding: 1rem 1rem 0.75rem;
+    border-radius: 18px;
+  }
+
+  .kb-title {
+    font-size: 0.9375rem;
+  }
+
+  .kb-head {
+    font-size: 0.75rem;
+  }
+
+  .kb-body {
+    gap: 0.625rem;
+    margin-top: 0.75rem;
+  }
+
+  .kb-question {
+    padding: 0.5rem 0.625rem;
+    border-radius: 10px;
+    font-size: 0.8125rem;
+  }
+
+  .kb-question svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .kb-answer {
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+
+  .kb-searching {
+    font-size: 0.8125rem;
+  }
+
+  .kb-source {
+    padding: 0.3125rem 0.5rem 0.3125rem 0.4375rem;
+    font-size: 0.75rem;
+  }
+
+  .kb-source svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .kb-foot {
+    margin-top: 0.75rem;
+    padding-top: 0.625rem;
+    font-size: 0.75rem;
+  }
+
+  .kb-zero {
+    font-size: 1.125rem;
+  }
+
+  .kb-sample {
+    font-size: 0.6875rem;
+  }
+
+  .promise-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* The card gets taller as the screen narrows, so below 400px the panel keeps
+   a floor that leaves the photo in the arch visible above it. A height, not a
+   min-height: with the aspect ratio still on, a min-height also sets a minimum
+   width and the page scrolls sideways. 145vw matches the 1 / 1.45 ratio. */
+@media (max-width: 400px) {
+  .hero-visual {
+    aspect-ratio: auto;
+    height: max(34rem, 145vw);
+  }
+}
+
+/* A phone held sideways: shrink the headline so the call to action still
+   shows on the first screen */
+@media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+  .hero-main {
+    padding-top: 1.25rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .hero-title {
+    margin-top: 0.875rem;
+    font-size: clamp(2.5rem, 13svh, 3.25rem);
+  }
+
+  .hero-actions {
+    margin-top: 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
-  .hero-scroll-space {
-    height: 250vh; /* even less scroll for small phones */
+  .hero-main,
+  .hero-statement {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
-  
-  .hero-title {
-    font-size: clamp(2rem, 12vw, 3.5rem);
+
+  .hero-promises {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
-  
-  .hero-subtitle {
-    font-size: clamp(0.95rem, 4.5vw, 1.1rem);
-    margin-bottom: 2rem;
+
+  .hero-actions .btn {
+    flex: 1 1 100%;
   }
-  
-  .hero .cta-btn-primary,
-  .hero .cta-btn-secondary {
-    width: 100%;
-    padding: 1rem 2rem;
-    font-size: 0.9rem;
-  }
-  
-  .carousel-slot {
-    width: 4.4ch; /* even tighter for small phones. */
+
+  .kb-scope {
+    display: none;
   }
 }
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-subtitle {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  color: var(--text-light);
-  margin-bottom: 3rem;
-  line-height: 1.7;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.highlight-text {
-  color: var(--secondary);
-  font-weight: 600;
-}
-
-.hero-cta {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.hero .cta-btn-primary {
-  padding: 1.2rem 3rem;
-  background: var(--hero-accent, var(--secondary));
-  color: var(--cream);
-  border: none;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 1.05rem;
-  cursor: pointer;
-  transition: all 0.4s var(--ease);
-  box-shadow: 0 4px 20px var(--hero-accent-rgba, rgba(207, 108, 88, 0.3));
-  position: relative;
-  overflow: hidden;
-}
-
-.hero .cta-btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-.hero .cta-btn-primary:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-.hero .cta-btn-primary:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 10px 40px var(--hero-accent-rgba, rgba(207, 108, 88, 0.5));
-}
-
-.btn-shine {
-  display: none;
-}
-
-.cta-btn-secondary {
-  padding: 1.2rem 3rem;
-  background: transparent;
-  color: var(--text);
-  border: 2px solid var(--text);
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 1.05rem;
-  cursor: pointer;
-  transition: all 0.4s var(--ease);
-}
-
-.cta-btn-secondary:hover {
-  border-color: var(--secondary);
-  color: var(--secondary);
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(207, 108, 88, 0.2);
-}
-
-/* Hero-specific accent sync */
-.hero .highlight-text {
-  color: var(--hero-accent);
-}
-
-.hero .cta-btn-secondary {
-  color: var(--hero-accent);
-  border-color: var(--hero-accent);
-}
-
-.hero .cta-btn-secondary:hover {
-  color: var(--hero-accent);
-  border-color: var(--hero-accent);
-  box-shadow: 0 10px 30px var(--hero-accent-rgba);
-}
-
-/* scroll indicator removed */
-
-.hero-shapes {
-  display: none;
-}
-
-/* mobile styles consolidated above */

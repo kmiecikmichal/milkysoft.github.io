@@ -36,7 +36,9 @@ export default [
       // Catches the exact class of bug that shipped here before: a target="_blank"
       // link without rel="noopener", which hands the opened tab a window.opener handle.
       'react/jsx-no-target-blank': ['error', { allowReferrer: false }],
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }]
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      // Props are plain internal data; the project does not ship prop-types.
+      'react/prop-types': 'off'
     }
   },
 
