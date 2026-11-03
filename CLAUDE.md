@@ -1,6 +1,6 @@
 # Milkysoft website
 
-Marketing site for milkysoft.io. React 18 + Vite, plain CSS per component (`src/components/*.css`), global tokens in `src/App.css`. Deployed to GitHub Pages via `npm run deploy`.
+Marketing site for milkysoft.io. React 18 + Vite, plain CSS per component (`src/components/*.css`), global tokens in `src/App.css`. Every push to `main` deploys to GitHub Pages through `.github/workflows/deploy.yml` (lint, audit, build); do not deploy from a laptop.
 
 ## Positioning
 
