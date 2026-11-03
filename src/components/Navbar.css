@@ -230,8 +230,11 @@ a.nav-lang-option:not(.is-current):hover {
     justify-content: space-between;
   }
 
+  /* Same idea as on desktop: the wordmark, not the logo box, lines up with
+     the middle of the menu button */
   .logo-image {
     height: 1.875rem;
+    translate: 0 -10%;
   }
 
   .mobile-menu-toggle {
